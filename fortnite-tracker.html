@@ -22,69 +22,71 @@
     --radius: 14px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    background-image:
-      radial-gradient(ellipse at 20% 0%, rgba(0,212,255,0.06) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 100%, rgba(255,107,53,0.06) 0%, transparent 60%);
-  }
-  header { padding: 28px 24px 0; text-align: center; }
-  .logo {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: clamp(26px, 6vw, 42px);
-    font-weight: 700;
-    letter-spacing: 2px;
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh;
+    background-image: radial-gradient(ellipse at 20% 0%, rgba(0,212,255,0.06) 0%, transparent 60%), radial-gradient(ellipse at 80% 100%, rgba(255,107,53,0.06) 0%, transparent 60%); }
+
+  /* ── HEADER ── */
+  header { padding: 24px 24px 0; text-align: center; }
+  .logo { font-family: 'Rajdhani', sans-serif; font-size: clamp(24px, 5vw, 38px); font-weight: 700; letter-spacing: 2px;
     background: linear-gradient(135deg, var(--lucas) 0%, #fff 50%, var(--jonte) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .subtitle { font-size: 12px; color: var(--muted); letter-spacing: 3px; text-transform: uppercase; margin-top: 4px; }
-  .sync-status {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 11px; color: var(--muted); margin-top: 10px;
-    padding: 4px 12px; background: var(--card);
-    border-radius: 20px; border: 1px solid var(--border);
-  }
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .subtitle { font-size: 11px; color: var(--muted); letter-spacing: 3px; text-transform: uppercase; margin-top: 4px; }
+  .sync-status { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); margin-top: 8px;
+    padding: 4px 12px; background: var(--card); border-radius: 20px; border: 1px solid var(--border); }
   .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); transition: background 0.3s; }
   .dot.live { background: var(--success); box-shadow: 0 0 8px var(--success); }
-  .container { max-width: 900px; margin: 0 auto; padding: 20px 16px 60px; }
 
-  .card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 20px; margin-bottom: 16px;
-    position: relative; overflow: hidden;
+  /* ── NAV TABS ── */
+  .nav { display: flex; gap: 8px; justify-content: center; margin: 16px 16px 0; }
+  .nav-tab {
+    flex: 1; max-width: 160px; padding: 10px 16px; border: 1px solid var(--border);
+    border-radius: 10px; background: var(--card); color: var(--muted);
+    font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
+    transition: all 0.2s; text-align: center;
   }
-  .card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, var(--lucas), var(--jonte)); opacity: 0.5;
-  }
-  .card-title {
-    font-family: 'Rajdhani', sans-serif; font-size: 16px; font-weight: 600;
-    letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent);
-    margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
-  }
-  .card-title i { width: 16px; height: 16px; }
+  .nav-tab:hover { border-color: var(--muted); color: var(--text); }
+  .nav-tab.active-overview { border-color: var(--accent); color: var(--accent); background: rgba(0,212,255,0.06); }
+  .nav-tab.active-lucas { border-color: var(--lucas); color: var(--lucas); background: rgba(0,212,255,0.08); }
+  .nav-tab.active-jonte { border-color: var(--jonte); color: var(--jonte); background: rgba(255,107,53,0.08); }
 
+  /* ── PLAYER BANNER ── */
+  .player-banner {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 18px; border-radius: 12px; margin-bottom: 4px;
+    font-family: 'Rajdhani', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: 2px;
+  }
+  .player-banner.lucas { background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2); color: var(--lucas); }
+  .player-banner.jonte { background: rgba(255,107,53,0.08); border: 1px solid rgba(255,107,53,0.2); color: var(--jonte); }
+  .player-banner i { width: 20px; height: 20px; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 16px 16px 60px; }
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ── CARDS ── */
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; position: relative; overflow: hidden; }
+  .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--lucas), var(--jonte)); opacity: 0.5; }
+  .card.lucas-card::before { background: var(--lucas); opacity: 0.6; }
+  .card.jonte-card::before { background: var(--jonte); opacity: 0.6; }
+
+  .card-title { font-family: 'Rajdhani', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .card-title i { width: 15px; height: 15px; }
+  .card-title.lucas { color: var(--lucas); }
+  .card-title.jonte { color: var(--jonte); }
+
+  /* ── INPUTS ── */
   .player-header { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px; }
-  .player-label {
-    text-align: center; font-size: 11px; font-weight: 500;
-    letter-spacing: 2px; text-transform: uppercase; padding: 6px; border-radius: 8px;
-  }
+  .player-label { text-align: center; font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; padding: 6px; border-radius: 8px; }
   .player-label.lucas { color: var(--lucas); background: rgba(0,212,255,0.08); }
   .player-label.jonte { color: var(--jonte); background: rgba(255,107,53,0.08); }
   .player-label.level { color: var(--muted); }
 
-  .input-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px; align-items: center; }
+  .input-row { display: grid; gap: 8px; margin-bottom: 8px; align-items: center; }
+  .input-row.two-col { grid-template-columns: 1fr 1fr 1fr; }
+  .input-row.one-col { grid-template-columns: 1fr 1fr; }
 
-  .level-badge {
-    text-align: center; font-size: 12px; font-weight: 500;
-    padding: 10px 6px; border-radius: 8px; color: var(--muted);
-    background: var(--surface); border: 1px solid var(--border);
-  }
+  .level-badge { text-align: center; font-size: 12px; font-weight: 500; padding: 10px 6px; border-radius: 8px; color: var(--muted); background: var(--surface); border: 1px solid var(--border); }
   .level-badge.easy    { color: #4ade80; border-color: rgba(74,222,128,0.2); }
   .level-badge.medium  { color: #facc15; border-color: rgba(250,204,21,0.2); }
   .level-badge.hard    { color: #fb923c; border-color: rgba(251,146,60,0.2); }
@@ -92,36 +94,27 @@
   .level-badge.impossible { color: #c084fc; border-color: rgba(192,132,252,0.2); }
 
   .input-wrap { position: relative; }
-  .input-wrap .calc-result {
-    position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
-    font-size: 10px; color: var(--success); font-weight: 600; pointer-events: none;
-  }
+  .calc-result { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 10px; color: var(--success); font-weight: 600; pointer-events: none; }
 
-  input[type="text"] {
-    width: 100%; padding: 10px 12px; background: var(--surface);
-    border: 1px solid var(--border); border-radius: 8px; color: var(--text);
-    font-size: 14px; font-family: 'Inter', sans-serif;
-    transition: border-color 0.2s, box-shadow 0.2s; text-align: center;
-  }
+  input[type="text"] { width: 100%; padding: 10px 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 14px; font-family: 'Inter', sans-serif; transition: border-color 0.2s, box-shadow 0.2s; text-align: center; }
   input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(0,212,255,0.12); }
+  input.lucas-input:focus { border-color: var(--lucas); box-shadow: 0 0 0 2px rgba(0,212,255,0.12); }
   input.jonte-input:focus { border-color: var(--jonte); box-shadow: 0 0 0 2px rgba(255,107,53,0.12); }
   input::placeholder { color: var(--muted); font-size: 11px; }
 
-  .edit-hint {
-    font-size: 11px; color: var(--muted); text-align: center;
-    margin-bottom: 10px; padding: 6px 10px; background: var(--surface);
-    border-radius: 8px; border: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: center; gap: 6px;
-  }
+  .edit-hint { font-size: 11px; color: var(--muted); margin-bottom: 10px; padding: 6px 10px; background: var(--surface); border-radius: 8px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; gap: 6px; }
   .edit-hint i { width: 12px; height: 12px; color: var(--accent); }
 
+  /* ── BUTTONS ── */
   .btn { padding: 12px 24px; border: none; border-radius: 10px; font-family: 'Rajdhani', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 1px; cursor: pointer; transition: all 0.2s; }
   .btn-primary { background: linear-gradient(135deg, var(--accent), #0090b8); color: #000; width: 100%; }
-  .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-lucas { background: linear-gradient(135deg, var(--lucas), #0090b8); color: #000; width: 100%; }
+  .btn-jonte { background: linear-gradient(135deg, var(--jonte), #cc4400); color: #000; width: 100%; }
+  .btn:hover { opacity: 0.88; transform: translateY(-1px); }
   .btn-small { padding: 8px 16px; font-size: 13px; background: var(--surface); color: var(--text); border: 1px solid var(--border); }
   .btn-small:hover { border-color: var(--accent); color: var(--accent); }
 
-  /* PROGRESS */
+  /* ── PROGRESS ── */
   .progress-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 8px; }
   .progress-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
   .progress-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; font-weight: 600; }
@@ -137,13 +130,8 @@
   .bar-lucas { background: linear-gradient(90deg, #00d4ff, #0090b8); }
   .bar-jonte { background: linear-gradient(90deg, #ff6b35, #cc4400); }
 
-  /* IMPROVEMENT */
-  .improvement-banner {
-    background: linear-gradient(135deg, rgba(0,229,160,0.1), rgba(0,212,255,0.05));
-    border: 1px solid rgba(0,229,160,0.25); border-radius: 10px;
-    padding: 14px 18px; font-family: 'Rajdhani', sans-serif; font-size: 18px;
-    font-weight: 600; text-align: center; color: var(--success); letter-spacing: 1px; min-height: 50px;
-  }
+  /* ── IMPROVEMENT ── */
+  .improvement-banner { background: linear-gradient(135deg, rgba(0,229,160,0.1), rgba(0,212,255,0.05)); border: 1px solid rgba(0,229,160,0.25); border-radius: 10px; padding: 14px 18px; font-family: 'Rajdhani', sans-serif; font-size: 18px; font-weight: 600; text-align: center; color: var(--success); letter-spacing: 1px; min-height: 50px; }
   .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
   .stat-box { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; text-align: center; }
   .stat-name { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
@@ -151,43 +139,39 @@
   .stat-val.lucas { color: var(--lucas); }
   .stat-val.jonte { color: var(--jonte); }
 
-  /* CHART */
+  /* ── CHART ── */
   .chart-wrap { position: relative; height: 200px; margin-top: 8px; }
 
-  /* HISTORY */
+  /* ── HISTORY ── */
   .history-day { margin-bottom: 16px; }
-  .history-day-header {
-    font-family: 'Rajdhani', sans-serif; font-size: 13px; font-weight: 600;
-    letter-spacing: 1px; color: var(--muted); text-transform: uppercase;
-    padding: 6px 0; border-bottom: 1px solid var(--border); margin-bottom: 8px;
-  }
+  .history-day-header { font-family: 'Rajdhani', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; padding: 6px 0; border-bottom: 1px solid var(--border); margin-bottom: 8px; }
   .history-run { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; margin-bottom: 6px; }
   .history-run-time { font-size: 10px; color: var(--muted); margin-bottom: 6px; letter-spacing: 1px; }
   .history-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 12px; }
+  .history-grid.single { grid-template-columns: 1fr; }
   .hp { color: var(--muted); }
   .hp span { color: var(--text); }
 
-  /* LOG */
+  /* ── LOG ── */
   .log-row { display: flex; gap: 8px; margin-bottom: 10px; }
   .log-row input { flex: 1; text-align: left; }
   .log-entry { background: var(--surface); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 8px 12px; margin-bottom: 6px; font-size: 13px; }
-  .log-date { font-size: 10px; color: var(--muted); margin-bottom: 2px; }
+  .log-entry.by-lucas { border-left-color: var(--lucas); }
+  .log-entry.by-jonte { border-left-color: var(--jonte); }
+  .log-meta { font-size: 10px; color: var(--muted); margin-bottom: 2px; display: flex; gap: 8px; align-items: center; }
+  .log-author { font-weight: 600; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; }
+  .log-author.lucas { color: var(--lucas); }
+  .log-author.jonte { color: var(--jonte); }
 
-  .toast {
-    position: fixed; bottom: 24px; left: 50%;
-    transform: translateX(-50%) translateY(80px);
-    background: var(--success); color: #000; padding: 10px 20px;
-    border-radius: 30px; font-family: 'Rajdhani', sans-serif;
-    font-weight: 700; font-size: 14px; letter-spacing: 1px;
-    transition: transform 0.3s ease; z-index: 999; pointer-events: none;
-  }
+  .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--success); color: #000; padding: 10px 20px; border-radius: 30px; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 1px; transition: transform 0.3s ease; z-index: 999; pointer-events: none; }
   .toast.show { transform: translateX(-50%) translateY(0); }
 
   @media (max-width: 500px) {
-    .input-row, .player-header { grid-template-columns: 80px 1fr 1fr; }
+    .input-row.two-col { grid-template-columns: 80px 1fr 1fr; }
     .progress-grid { grid-template-columns: 1fr; }
     .stats-row { grid-template-columns: 1fr 1fr; }
     .card { padding: 14px; }
+    .nav-tab { font-size: 12px; padding: 8px 10px; }
   }
 </style>
 </head>
@@ -202,142 +186,184 @@
   </div>
 </header>
 
+<!-- NAV -->
+<div class="nav">
+  <div class="nav-tab active-overview" onclick="setPage('overview')" id="tab-overview">Översikt</div>
+  <div class="nav-tab" onclick="setPage('lucas')" id="tab-lucas">Lucas</div>
+  <div class="nav-tab" onclick="setPage('jonte')" id="tab-jonte">Jonte</div>
+</div>
+
 <div class="container">
 
-  <!-- FÖRBÄTTRING -->
-  <div class="card">
-    <div class="card-title"><i data-lucide="trophy"></i> Vem har förbättrats mest?</div>
-    <div class="improvement-banner" id="improvement">Laddar...</div>
-    <div class="stats-row">
-      <div class="stat-box">
-        <div class="stat-name">Lucas snitt edit</div>
-        <div class="stat-val lucas" id="statLucas">–</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-name">Jonte snitt edit</div>
-        <div class="stat-val jonte" id="statJonte">–</div>
-      </div>
-    </div>
-  </div>
+  <!-- ══════════════════════════════════════ -->
+  <!-- PAGE: ÖVERSIKT -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="page active" id="page-overview">
 
-  <!-- PROGRESS -->
-  <div class="card">
-    <div class="card-title"><i data-lucide="bar-chart-2"></i> Förbättring per kategori</div>
-    <div class="progress-grid">
-      <div class="progress-card">
-        <div class="progress-label">Lucas</div>
-        <div class="progress-row"><div class="progress-row-header"><span class="progress-name">Edit (tid)</span><span class="progress-pct neu" id="pL-edit">–</span></div><div class="bar-track"><div class="bar-fill bar-lucas" id="bL-edit" style="width:0%"></div></div></div>
-        <div class="progress-row"><div class="progress-row-header"><span class="progress-name">Aim (poäng)</span><span class="progress-pct neu" id="pL-aim">–</span></div><div class="bar-track"><div class="bar-fill bar-lucas" id="bL-aim" style="width:0%"></div></div></div>
-        <div class="progress-row"><div class="progress-row-header"><span class="progress-name">Box Fight</span><span class="progress-pct neu" id="pL-box">–</span></div><div class="bar-track"><div class="bar-fill bar-lucas" id="bL-box" style="width:0%"></div></div></div>
-        <div class="progress-row"><div class="progress-row-header"><span class="progress-name">Zone Wars</span><span class="progress-pct neu" id="pL-zone">–</span></div><div class="bar-track"><div class="bar-fill bar-lucas" id="bL-zone" style="width:0%"></div></div></div>
-      </div>
-      <div class="progress-card">
-        <div class="progress-label">Jonte</div>
-        <div class="progress-row"><div class="progress-row-header"><span class="progress-name">Edit (tid)</span><span class="progress-pct neu" id="pJ-edit">–</span></div><div class="bar-track"><div class="bar-fill bar-jonte" id="bJ-edit" style="width:0%"></div></div></div>
-        <div class="progress-row"><div class="progress-row-header"><span class="progress-name">Aim (poäng)</span><span class="progress-pct neu" id="pJ-aim">–</span></div><div class="bar-track"><div class="bar-fill bar-jonte" id="bJ-aim" style="width:0%"></div></div></div>
-        <div class="progress-row"><div class="progress-row-header"><span class="progress-name">Box Fight</span><span class="progress-pct neu" id="pJ-box">–</span></div><div class="bar-track"><div class="bar-fill bar-jonte" id="bJ-box" style="width:0%"></div></div></div>
-        <div class="progress-row"><div class="progress-row-header"><span class="progress-name">Zone Wars</span><span class="progress-pct neu" id="pJ-zone">–</span></div><div class="bar-track"><div class="bar-fill bar-jonte" id="bJ-zone" style="width:0%"></div></div></div>
+    <div class="card">
+      <div class="card-title"><i data-lucide="trophy"></i> Vem har förbättrats mest?</div>
+      <div class="improvement-banner" id="improvement">Laddar...</div>
+      <div class="stats-row">
+        <div class="stat-box"><div class="stat-name">Lucas snitt edit</div><div class="stat-val lucas" id="statLucas">–</div></div>
+        <div class="stat-box"><div class="stat-name">Jonte snitt edit</div><div class="stat-val jonte" id="statJonte">–</div></div>
       </div>
     </div>
-    <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:4px">Första dag vs senaste dag. Edit: kortare tid = bättre. Aim/Box/Zone: fler = bättre.</p>
+
+    <div class="card">
+      <div class="card-title"><i data-lucide="bar-chart-2"></i> Förbättring per kategori</div>
+      <div class="progress-grid">
+        <div class="progress-card">
+          <div class="progress-label">Lucas</div>
+          <div class="progress-row"><div class="progress-row-header"><span class="progress-name">Edit</span><span class="progress-pct neu" id="pL-edit">–</span></div><div class="bar-track"><div class="bar-fill bar-lucas" id="bL-edit" style="width:0%"></div></div></div>
+          <div class="progress-row"><div class="progress-row-header"><span class="progress-name">Aim</span><span class="progress-pct neu" id="pL-aim">–</span></div><div class="bar-track"><div class="bar-fill bar-lucas" id="bL-aim" style="width:0%"></div></div></div>
+          <div class="progress-row"><div class="progress-row-header"><span class="progress-name">Box Fight</span><span class="progress-pct neu" id="pL-box">–</span></div><div class="bar-track"><div class="bar-fill bar-lucas" id="bL-box" style="width:0%"></div></div></div>
+          <div class="progress-row"><div class="progress-row-header"><span class="progress-name">Zone Wars</span><span class="progress-pct neu" id="pL-zone">–</span></div><div class="bar-track"><div class="bar-fill bar-lucas" id="bL-zone" style="width:0%"></div></div></div>
+        </div>
+        <div class="progress-card">
+          <div class="progress-label">Jonte</div>
+          <div class="progress-row"><div class="progress-row-header"><span class="progress-name">Edit</span><span class="progress-pct neu" id="pJ-edit">–</span></div><div class="bar-track"><div class="bar-fill bar-jonte" id="bJ-edit" style="width:0%"></div></div></div>
+          <div class="progress-row"><div class="progress-row-header"><span class="progress-name">Aim</span><span class="progress-pct neu" id="pJ-aim">–</span></div><div class="bar-track"><div class="bar-fill bar-jonte" id="bJ-aim" style="width:0%"></div></div></div>
+          <div class="progress-row"><div class="progress-row-header"><span class="progress-name">Box Fight</span><span class="progress-pct neu" id="pJ-box">–</span></div><div class="bar-track"><div class="bar-fill bar-jonte" id="bJ-box" style="width:0%"></div></div></div>
+          <div class="progress-row"><div class="progress-row-header"><span class="progress-name">Zone Wars</span><span class="progress-pct neu" id="pJ-zone">–</span></div><div class="bar-track"><div class="bar-fill bar-jonte" id="bJ-zone" style="width:0%"></div></div></div>
+        </div>
+      </div>
+      <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:4px">Första dag vs senaste dag. Edit: kortare = bättre. Aim/Box/Zone: fler = bättre.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><i data-lucide="trending-up"></i> Utveckling över tid</div>
+      <div class="chart-wrap"><canvas id="chart" role="img" aria-label="Edit-snitt per dag">Ingen data.</canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><i data-lucide="notebook-pen"></i> Dagbok</div>
+      <div id="logs-overview"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><i data-lucide="calendar"></i> Historik</div>
+      <div id="history"></div>
+    </div>
+
   </div>
 
-  <!-- CHART -->
-  <div class="card">
-    <div class="card-title"><i data-lucide="trending-up"></i> Utveckling över tid (edit-snitt per dag)</div>
-    <div class="chart-wrap">
-      <canvas id="chart" role="img" aria-label="Linjediagram över edit-snitt per dag">Ingen data ännu.</canvas>
+  <!-- ══════════════════════════════════════ -->
+  <!-- PAGE: LUCAS -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="page" id="page-lucas">
+
+    <div class="player-banner lucas"><i data-lucide="user"></i> Lucas</div>
+
+    <div class="card lucas-card">
+      <div class="card-title lucas"><i data-lucide="pencil"></i> Edit Träning</div>
+      <div class="edit-hint"><i data-lucide="info"></i> Skriv vad klockan visade när du var klar (banan börjar på 10:00)</div>
+      <div class="player-header" style="grid-template-columns:1fr 1fr">
+        <div class="player-label level">Nivå</div>
+        <div class="player-label lucas">Din tid</div>
+      </div>
+      <div class="input-row one-col"><div class="level-badge easy">Easy</div><div class="input-wrap"><input type="text" class="lEdit" placeholder="t.ex. 8:23" oninput="calcEdit(this,'rLE0')"><span class="calc-result" id="rLE0"></span></div></div>
+      <div class="input-row one-col"><div class="level-badge medium">Medium</div><div class="input-wrap"><input type="text" class="lEdit" placeholder="t.ex. 8:23" oninput="calcEdit(this,'rLE1')"><span class="calc-result" id="rLE1"></span></div></div>
+      <div class="input-row one-col"><div class="level-badge hard">Hard</div><div class="input-wrap"><input type="text" class="lEdit" placeholder="t.ex. 8:23" oninput="calcEdit(this,'rLE2')"><span class="calc-result" id="rLE2"></span></div></div>
+      <div class="input-row one-col"><div class="level-badge vhard">Very Hard</div><div class="input-wrap"><input type="text" class="lEdit" placeholder="t.ex. 8:23" oninput="calcEdit(this,'rLE3')"><span class="calc-result" id="rLE3"></span></div></div>
+      <div class="input-row one-col"><div class="level-badge impossible">Impossible</div><div class="input-wrap"><input type="text" class="lEdit" placeholder="t.ex. 8:23" oninput="calcEdit(this,'rLE4')"><span class="calc-result" id="rLE4"></span></div></div>
     </div>
+
+    <div class="card lucas-card">
+      <div class="card-title lucas"><i data-lucide="crosshair"></i> Aim Training – Poäng</div>
+      <div class="input-row one-col"><div class="level-badge easy">Kör 1</div><input type="text" class="lAim lucas-input" placeholder="–"></div>
+      <div class="input-row one-col"><div class="level-badge medium">Kör 2</div><input type="text" class="lAim lucas-input" placeholder="–"></div>
+    </div>
+
+    <div class="card lucas-card">
+      <div class="card-title lucas"><i data-lucide="box"></i> Box Fight – Vinster</div>
+      <div class="input-row one-col"><div class="level-badge" style="color:var(--muted)">Antal</div><input type="text" id="lBox" class="lucas-input" placeholder="0"></div>
+    </div>
+
+    <div class="card lucas-card">
+      <div class="card-title lucas"><i data-lucide="zap"></i> Zone Wars – Vinster</div>
+      <div class="input-row one-col"><div class="level-badge" style="color:var(--muted)">Antal</div><input type="text" id="lZone" class="lucas-input" placeholder="0"></div>
+    </div>
+
+    <div class="card lucas-card">
+      <div class="card-title lucas"><i data-lucide="save"></i> Spara körning</div>
+      <button class="btn btn-lucas" onclick="savePlayer('lucas')">SPARA – LUCAS</button>
+    </div>
+
+    <div class="card lucas-card">
+      <div class="card-title lucas"><i data-lucide="notebook-pen"></i> Vad har du gjort idag?</div>
+      <div class="log-row">
+        <input type="text" id="logInput-lucas" placeholder="Skriv vad du tränade på...">
+        <button class="btn btn-small" onclick="addLog('lucas')">Lägg till</button>
+      </div>
+      <div id="logs-lucas"></div>
+    </div>
+
+    <div class="card lucas-card">
+      <div class="card-title lucas"><i data-lucide="calendar"></i> Din historik</div>
+      <div id="history-lucas"></div>
+    </div>
+
   </div>
 
-  <!-- EDIT TRÄNING -->
-  <div class="card">
-    <div class="card-title"><i data-lucide="pencil"></i> Edit Träning</div>
-    <div class="edit-hint">
-      <i data-lucide="info"></i>
-      Skriv in vad klockan visade när du var klar — appen räknar ut din tid (10:00 minus din tid)
+  <!-- ══════════════════════════════════════ -->
+  <!-- PAGE: JONTE -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="page" id="page-jonte">
+
+    <div class="player-banner jonte"><i data-lucide="user"></i> Jonte</div>
+
+    <div class="card jonte-card">
+      <div class="card-title jonte"><i data-lucide="pencil"></i> Edit Träning</div>
+      <div class="edit-hint"><i data-lucide="info"></i> Skriv vad klockan visade när du var klar (banan börjar på 10:00)</div>
+      <div class="player-header" style="grid-template-columns:1fr 1fr">
+        <div class="player-label level">Nivå</div>
+        <div class="player-label jonte">Din tid</div>
+      </div>
+      <div class="input-row one-col"><div class="level-badge easy">Easy</div><div class="input-wrap"><input type="text" class="jEdit" placeholder="t.ex. 8:23" oninput="calcEdit(this,'rJE0')"><span class="calc-result" id="rJE0"></span></div></div>
+      <div class="input-row one-col"><div class="level-badge medium">Medium</div><div class="input-wrap"><input type="text" class="jEdit" placeholder="t.ex. 8:23" oninput="calcEdit(this,'rJE1')"><span class="calc-result" id="rJE1"></span></div></div>
+      <div class="input-row one-col"><div class="level-badge hard">Hard</div><div class="input-wrap"><input type="text" class="jEdit" placeholder="t.ex. 8:23" oninput="calcEdit(this,'rJE2')"><span class="calc-result" id="rJE2"></span></div></div>
+      <div class="input-row one-col"><div class="level-badge vhard">Very Hard</div><div class="input-wrap"><input type="text" class="jEdit" placeholder="t.ex. 8:23" oninput="calcEdit(this,'rJE3')"><span class="calc-result" id="rJE3"></span></div></div>
+      <div class="input-row one-col"><div class="level-badge impossible">Impossible</div><div class="input-wrap"><input type="text" class="jEdit" placeholder="t.ex. 8:23" oninput="calcEdit(this,'rJE4')"><span class="calc-result" id="rJE4"></span></div></div>
     </div>
-    <div class="player-header">
-      <div class="player-label level">Nivå</div>
-      <div class="player-label lucas">Lucas</div>
-      <div class="player-label jonte">Jonte</div>
+
+    <div class="card jonte-card">
+      <div class="card-title jonte"><i data-lucide="crosshair"></i> Aim Training – Poäng</div>
+      <div class="input-row one-col"><div class="level-badge easy">Kör 1</div><input type="text" class="jAim jonte-input" placeholder="–"></div>
+      <div class="input-row one-col"><div class="level-badge medium">Kör 2</div><input type="text" class="jAim jonte-input" placeholder="–"></div>
     </div>
-    <div class="input-row">
-      <div class="level-badge easy">Easy</div>
-      <div class="input-wrap"><input type="text" class="lEdit" placeholder="t.ex. 8:23" oninput="calcEdit(this,'rLE0')"><span class="calc-result" id="rLE0"></span></div>
-      <div class="input-wrap"><input type="text" class="jEdit jonte-input" placeholder="t.ex. 7:45" oninput="calcEdit(this,'rJE0')"><span class="calc-result" id="rJE0"></span></div>
+
+    <div class="card jonte-card">
+      <div class="card-title jonte"><i data-lucide="box"></i> Box Fight – Vinster</div>
+      <div class="input-row one-col"><div class="level-badge" style="color:var(--muted)">Antal</div><input type="text" id="jBox" class="jonte-input" placeholder="0"></div>
     </div>
-    <div class="input-row">
-      <div class="level-badge medium">Medium</div>
-      <div class="input-wrap"><input type="text" class="lEdit" placeholder="t.ex. 8:23" oninput="calcEdit(this,'rLE1')"><span class="calc-result" id="rLE1"></span></div>
-      <div class="input-wrap"><input type="text" class="jEdit jonte-input" placeholder="t.ex. 7:45" oninput="calcEdit(this,'rJE1')"><span class="calc-result" id="rJE1"></span></div>
+
+    <div class="card jonte-card">
+      <div class="card-title jonte"><i data-lucide="zap"></i> Zone Wars – Vinster</div>
+      <div class="input-row one-col"><div class="level-badge" style="color:var(--muted)">Antal</div><input type="text" id="jZone" class="jonte-input" placeholder="0"></div>
     </div>
-    <div class="input-row">
-      <div class="level-badge hard">Hard</div>
-      <div class="input-wrap"><input type="text" class="lEdit" placeholder="t.ex. 8:23" oninput="calcEdit(this,'rLE2')"><span class="calc-result" id="rLE2"></span></div>
-      <div class="input-wrap"><input type="text" class="jEdit jonte-input" placeholder="t.ex. 7:45" oninput="calcEdit(this,'rJE2')"><span class="calc-result" id="rJE2"></span></div>
+
+    <div class="card jonte-card">
+      <div class="card-title jonte"><i data-lucide="save"></i> Spara körning</div>
+      <button class="btn btn-jonte" onclick="savePlayer('jonte')">SPARA – JONTE</button>
     </div>
-    <div class="input-row">
-      <div class="level-badge vhard">Very Hard</div>
-      <div class="input-wrap"><input type="text" class="lEdit" placeholder="t.ex. 8:23" oninput="calcEdit(this,'rLE3')"><span class="calc-result" id="rLE3"></span></div>
-      <div class="input-wrap"><input type="text" class="jEdit jonte-input" placeholder="t.ex. 7:45" oninput="calcEdit(this,'rJE3')"><span class="calc-result" id="rJE3"></span></div>
+
+    <div class="card jonte-card">
+      <div class="card-title jonte"><i data-lucide="notebook-pen"></i> Vad har du gjort idag?</div>
+      <div class="log-row">
+        <input type="text" id="logInput-jonte" placeholder="Skriv vad du tränade på...">
+        <button class="btn btn-small" onclick="addLog('jonte')">Lägg till</button>
+      </div>
+      <div id="logs-jonte"></div>
     </div>
-    <div class="input-row">
-      <div class="level-badge impossible">Impossible</div>
-      <div class="input-wrap"><input type="text" class="lEdit" placeholder="t.ex. 8:23" oninput="calcEdit(this,'rLE4')"><span class="calc-result" id="rLE4"></span></div>
-      <div class="input-wrap"><input type="text" class="jEdit jonte-input" placeholder="t.ex. 7:45" oninput="calcEdit(this,'rJE4')"><span class="calc-result" id="rJE4"></span></div>
+
+    <div class="card jonte-card">
+      <div class="card-title jonte"><i data-lucide="calendar"></i> Din historik</div>
+      <div id="history-jonte"></div>
     </div>
+
   </div>
 
-  <!-- AIM -->
-  <div class="card">
-    <div class="card-title"><i data-lucide="crosshair"></i> Aim Training – Poäng</div>
-    <div class="player-header">
-      <div class="player-label level">Kör</div>
-      <div class="player-label lucas">Lucas</div>
-      <div class="player-label jonte">Jonte</div>
-    </div>
-    <div class="input-row"><div class="level-badge easy">Kör 1</div><input type="text" class="lAim" placeholder="–"><input type="text" class="jAim jonte-input" placeholder="–"></div>
-    <div class="input-row"><div class="level-badge medium">Kör 2</div><input type="text" class="lAim" placeholder="–"><input type="text" class="jAim jonte-input" placeholder="–"></div>
-  </div>
-
-  <!-- BOX FIGHT -->
-  <div class="card">
-    <div class="card-title"><i data-lucide="box"></i> Box Fight – Vinster</div>
-    <div class="player-header"><div class="player-label level"></div><div class="player-label lucas">Lucas</div><div class="player-label jonte">Jonte</div></div>
-    <div class="input-row"><div class="level-badge" style="color:var(--muted)">Idag</div><input type="text" id="lBox" placeholder="0"><input type="text" id="jBox" class="jonte-input" placeholder="0"></div>
-  </div>
-
-  <!-- ZONE WARS -->
-  <div class="card">
-    <div class="card-title"><i data-lucide="zap"></i> Zone Wars – Vinster</div>
-    <div class="player-header"><div class="player-label level"></div><div class="player-label lucas">Lucas</div><div class="player-label jonte">Jonte</div></div>
-    <div class="input-row"><div class="level-badge" style="color:var(--muted)">Idag</div><input type="text" id="lZone" placeholder="0"><input type="text" id="jZone" class="jonte-input" placeholder="0"></div>
-  </div>
-
-  <!-- SPARA -->
-  <div class="card">
-    <div class="card-title"><i data-lucide="save"></i> Spara denna körning</div>
-    <button class="btn btn-primary" onclick="saveDay()">SPARA</button>
-  </div>
-
-  <!-- DAGBOK -->
-  <div class="card">
-    <div class="card-title"><i data-lucide="notebook-pen"></i> Vad har ni gjort idag?</div>
-    <div class="log-row">
-      <input type="text" id="logInput" placeholder="Skriv vad ni tränade på...">
-      <button class="btn btn-small" onclick="addLog()">Lägg till</button>
-    </div>
-    <div id="logs"></div>
-  </div>
-
-  <!-- HISTORIK -->
-  <div class="card">
-    <div class="card-title"><i data-lucide="calendar"></i> Historik</div>
-    <div id="history"></div>
-  </div>
-
-</div>
+</div><!-- /container -->
 
 <div class="toast" id="toast">✓ Sparat!</div>
 
@@ -352,50 +378,51 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const API = `${SUPABASE_URL}/rest/v1`;
 const HEADS = { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=representation' };
 
-// ── EDIT TID-KALKYL: 10:00 minus vad klockan visade ──
-// Input: "8:23" → 10:00 - 8:23 = 1:37 = 97 sekunder
+// ── NAVIGATION ──
+function setPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.className = 'nav-tab');
+  document.getElementById('page-' + page).classList.add('active');
+  document.getElementById('tab-' + page).classList.add('active-' + page);
+  window.scrollTo(0, 0);
+}
+
+// ── EDIT KALKYL ──
 function parseEditTime(val) {
   val = val.trim();
   const parts = val.split(':');
   if (parts.length !== 2) return null;
-  const m = parseInt(parts[0]);
-  const s = parseInt(parts[1]);
+  const m = parseInt(parts[0]), s = parseInt(parts[1]);
   if (isNaN(m) || isNaN(s)) return null;
-  const remaining = m * 60 + s;
-  const totalSecs = 10 * 60 - remaining; // 10 min minus kvarvarande
-  if (totalSecs <= 0 || totalSecs >= 600) return null;
-  return totalSecs;
+  const secs = 10 * 60 - (m * 60 + s);
+  return (secs > 0 && secs < 600) ? secs : null;
 }
 
 function secsToDisplay(secs) {
   if (!secs) return null;
-  const m = Math.floor(secs / 60);
-  const s = secs % 60;
+  const m = Math.floor(secs / 60), s = secs % 60;
   return m > 0 ? `${m}:${String(s).padStart(2,'0')}` : `${s}s`;
 }
 
 function calcEdit(input, resultId) {
   const secs = parseEditTime(input.value);
   const el = document.getElementById(resultId);
-  if (secs) {
-    el.textContent = '= ' + secsToDisplay(secs);
-  } else {
-    el.textContent = '';
-  }
+  el.textContent = secs ? '= ' + secsToDisplay(secs) : '';
 }
 
-function getEditSeconds(inputs) {
-  return [...inputs].map(i => parseEditTime(i.value)).filter(x => x !== null);
+function getEditSeconds(cls) {
+  return [...document.querySelectorAll('.' + cls)].map(i => parseEditTime(i.value)).filter(x => x !== null);
 }
 
+// ── DB ──
 function setSync(live) {
   document.getElementById('syncDot').className = 'dot' + (live ? ' live' : '');
   document.getElementById('syncText').textContent = live ? 'Live sync' : 'Offline';
 }
 
-async function dbGet(table) {
+async function dbGet(table, extra = '') {
   try {
-    const r = await fetch(`${API}/${table}?order=created_at.asc`, { headers: HEADS });
+    const r = await fetch(`${API}/${table}?order=created_at.asc${extra}`, { headers: HEADS });
     if (!r.ok) throw new Error();
     setSync(true);
     return await r.json();
@@ -423,80 +450,102 @@ function toast(msg) {
   setTimeout(() => t.classList.remove('show'), 2500);
 }
 
-async function saveDay() {
-  const lEditInputs = document.querySelectorAll('.lEdit');
-  const jEditInputs = document.querySelectorAll('.jEdit');
-  const lEditSecs = getEditSeconds(lEditInputs);
-  const jEditSecs = getEditSeconds(jEditInputs);
-  const lAim  = [...document.querySelectorAll('.lAim')].map(i=>i.value);
-  const jAim  = [...document.querySelectorAll('.jAim')].map(i=>i.value);
-  const lBox  = document.getElementById('lBox').value;
-  const jBox  = document.getElementById('jBox').value;
+// ── SPARA PER SPELARE ──
+async function savePlayer(player) {
+  const isLucas = player === 'lucas';
+
+  const lEditSecs = getEditSeconds('lEdit');
+  const jEditSecs = getEditSeconds('jEdit');
+  const lAim = [...document.querySelectorAll('.lAim')].map(i=>i.value);
+  const jAim = [...document.querySelectorAll('.jAim')].map(i=>i.value);
+  const lBox = document.getElementById('lBox').value;
+  const jBox = document.getElementById('jBox').value;
   const lZone = document.getElementById('lZone').value;
   const jZone = document.getElementById('jZone').value;
 
-  const ok = await dbInsert('sessions', {
-    date: today(), time: timeNow(),
+  const data = {
+    date: today(), time: timeNow(), saved_by: player,
     l_edit: lEditSecs, j_edit: jEditSecs,
     l_aim: lAim, j_aim: jAim,
     l_box: Number(lBox)||0, j_box: Number(jBox)||0,
     l_zone: Number(lZone)||0, j_zone: Number(jZone)||0
-  });
+  };
 
+  const ok = await dbInsert('sessions', data);
   if (ok) {
-    toast('✓ Körning sparad!');
-    document.querySelectorAll('.lEdit,.jEdit,.lAim,.jAim').forEach(i=>i.value='');
-    ['lBox','jBox','lZone','jZone'].forEach(id=>document.getElementById(id).value='');
-    // Clear calc results
-    document.querySelectorAll('.calc-result').forEach(el=>el.textContent='');
+    toast(`✓ ${isLucas ? 'Lucas' : 'Jonte'} – sparat!`);
+    if (isLucas) {
+      document.querySelectorAll('.lEdit,.lAim').forEach(i=>i.value='');
+      document.getElementById('lBox').value='';
+      document.getElementById('lZone').value='';
+      document.querySelectorAll('[id^="rLE"]').forEach(el=>el.textContent='');
+    } else {
+      document.querySelectorAll('.jEdit,.jAim').forEach(i=>i.value='');
+      document.getElementById('jBox').value='';
+      document.getElementById('jZone').value='';
+      document.querySelectorAll('[id^="rJE"]').forEach(el=>el.textContent='');
+    }
     await loadAll();
   } else {
     toast('❌ Fel – kontrollera Supabase');
   }
 }
 
-async function addLog() {
-  const v = document.getElementById('logInput').value.trim();
+// ── LOGG ──
+async function addLog(player) {
+  const input = document.getElementById(`logInput-${player}`);
+  const v = input.value.trim();
   if (!v) return;
-  await dbInsert('logs', { date: today(), time: timeNow(), text: v });
-  document.getElementById('logInput').value = '';
+  await dbInsert('logs', { date: today(), time: timeNow(), text: v, author: player });
+  input.value = '';
   toast('✓ Logg sparad!');
   await loadLogs();
 }
 
-async function loadLogs() {
-  const logs = await dbGet('logs');
-  const div = document.getElementById('logs');
-  if (!logs.length) { div.innerHTML = ''; return; }
-  div.innerHTML = [...logs].reverse().map(l => `
-    <div class="log-entry">
-      <div class="log-date">${l.date} ${l.time||''}</div>
-      ${l.text}
-    </div>
-  `).join('');
+function logEntryHTML(l) {
+  const author = l.author || '';
+  const authorLabel = author === 'lucas' ? '<span class="log-author lucas">Lucas</span>' : author === 'jonte' ? '<span class="log-author jonte">Jonte</span>' : '';
+  return `<div class="log-entry ${author ? 'by-' + author : ''}">
+    <div class="log-meta">${authorLabel}<span>${l.date} ${l.time||''}</span></div>
+    ${l.text}
+  </div>`;
 }
 
+async function loadLogs() {
+  const logs = await dbGet('logs');
+  const all = [...logs].reverse();
+
+  const ovEl = document.getElementById('logs-overview');
+  ovEl.innerHTML = all.length ? all.map(logEntryHTML).join('') : '<p style="color:var(--muted);font-size:13px">Ingen logg ännu.</p>';
+
+  const lEl = document.getElementById('logs-lucas');
+  const lLogs = all.filter(l => !l.author || l.author === 'lucas');
+  lEl.innerHTML = lLogs.length ? lLogs.map(logEntryHTML).join('') : '<p style="color:var(--muted);font-size:13px">Ingen logg ännu.</p>';
+
+  const jEl = document.getElementById('logs-jonte');
+  const jLogs = all.filter(l => l.author === 'jonte');
+  jEl.innerHTML = jLogs.length ? jLogs.map(logEntryHTML).join('') : '<p style="color:var(--muted);font-size:13px">Ingen logg ännu.</p>';
+}
+
+// ── HISTORIK ──
 function fmtEditArr(arr) {
   if (!arr || !arr.length) return '–';
   return arr.map(s => secsToDisplay(Number(s))).filter(Boolean).join(', ') || '–';
 }
 
 function renderHistory(sessions) {
-  const div = document.getElementById('history');
-  if (!sessions.length) { div.innerHTML = '<p style="color:var(--muted);font-size:13px">Inga körningar sparade än.</p>'; return; }
-
   const byDay = {};
   [...sessions].reverse().forEach(s => {
     if (!byDay[s.date]) byDay[s.date] = [];
     byDay[s.date].push(s);
   });
 
-  div.innerHTML = Object.entries(byDay).map(([date, runs]) => `
+  const fullHTML = Object.entries(byDay).map(([date, runs]) => `
     <div class="history-day">
       <div class="history-day-header">${date} — ${runs.length} körning${runs.length>1?'ar':''}</div>
-      ${runs.map((s, i) => `
+      ${runs.map((s,i) => `
         <div class="history-run">
-          <div class="history-run-time">KÖR ${runs.length - i} • ${s.time||''}</div>
+          <div class="history-run-time">KÖR ${runs.length-i} • ${s.time||''}</div>
           <div class="history-grid">
             <div class="hp" style="color:var(--lucas)">Lucas edit: <span>${fmtEditArr(s.l_edit)}</span></div>
             <div class="hp" style="color:var(--jonte)">Jonte edit: <span>${fmtEditArr(s.j_edit)}</span></div>
@@ -507,10 +556,44 @@ function renderHistory(sessions) {
           </div>
         </div>
       `).join('')}
-    </div>
-  `).join('');
+    </div>`).join('');
+
+  const lucasHTML = Object.entries(byDay).map(([date, runs]) => `
+    <div class="history-day">
+      <div class="history-day-header">${date}</div>
+      ${runs.map((s,i) => `
+        <div class="history-run">
+          <div class="history-run-time">KÖR ${runs.length-i} • ${s.time||''}</div>
+          <div class="history-grid single">
+            <div class="hp" style="color:var(--lucas)">Edit: <span>${fmtEditArr(s.l_edit)}</span></div>
+            <div class="hp" style="color:var(--lucas)">Aim: <span>${(s.l_aim||[]).filter(x=>x).join(', ')||'–'}</span></div>
+            <div class="hp" style="color:var(--lucas)">Box: <span>${s.l_box??'–'}</span> · Zone: <span>${s.l_zone??'–'}</span></div>
+          </div>
+        </div>
+      `).join('')}
+    </div>`).join('');
+
+  const jonteHTML = Object.entries(byDay).map(([date, runs]) => `
+    <div class="history-day">
+      <div class="history-day-header">${date}</div>
+      ${runs.map((s,i) => `
+        <div class="history-run">
+          <div class="history-run-time">KÖR ${runs.length-i} • ${s.time||''}</div>
+          <div class="history-grid single">
+            <div class="hp" style="color:var(--jonte)">Edit: <span>${fmtEditArr(s.j_edit)}</span></div>
+            <div class="hp" style="color:var(--jonte)">Aim: <span>${(s.j_aim||[]).filter(x=>x).join(', ')||'–'}</span></div>
+            <div class="hp" style="color:var(--jonte)">Box: <span>${s.j_box??'–'}</span> · Zone: <span>${s.j_zone??'–'}</span></div>
+          </div>
+        </div>
+      `).join('')}
+    </div>`).join('');
+
+  document.getElementById('history').innerHTML = fullHTML || '<p style="color:var(--muted);font-size:13px">Inga körningar sparade än.</p>';
+  document.getElementById('history-lucas').innerHTML = lucasHTML || '<p style="color:var(--muted);font-size:13px">Inga körningar sparade än.</p>';
+  document.getElementById('history-jonte').innerHTML = jonteHTML || '<p style="color:var(--muted);font-size:13px">Inga körningar sparade än.</p>';
 }
 
+// ── CHART ──
 let chart;
 function renderChart(sessions) {
   const byDay = {};
@@ -522,19 +605,14 @@ function renderChart(sessions) {
   const days = Object.keys(byDay).sort();
   const dL = days.map(d => avg(byDay[d].lEdit) || null);
   const dJ = days.map(d => avg(byDay[d].jEdit) || null);
-
   if (chart) chart.destroy();
   chart = new Chart(document.getElementById('chart'), {
     type: 'line',
-    data: {
-      labels: days,
-      datasets: [
-        { label: 'Lucas (sek)', data: dL, borderColor: '#00d4ff', backgroundColor: 'rgba(0,212,255,0.08)', pointBackgroundColor: '#00d4ff', tension: 0.4, fill: true, pointRadius: 5 },
-        { label: 'Jonte (sek)', data: dJ, borderColor: '#ff6b35', backgroundColor: 'rgba(255,107,53,0.08)', pointBackgroundColor: '#ff6b35', tension: 0.4, fill: true, pointRadius: 5, borderDash: [4,3] }
-      ]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
+    data: { labels: days, datasets: [
+      { label: 'Lucas', data: dL, borderColor: '#00d4ff', backgroundColor: 'rgba(0,212,255,0.08)', pointBackgroundColor: '#00d4ff', tension: 0.4, fill: true, pointRadius: 5 },
+      { label: 'Jonte', data: dJ, borderColor: '#ff6b35', backgroundColor: 'rgba(255,107,53,0.08)', pointBackgroundColor: '#ff6b35', tension: 0.4, fill: true, pointRadius: 5, borderDash: [4,3] }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false,
       plugins: { legend: { labels: { color: '#5a7a9a', font: { family: 'Inter', size: 11 }, usePointStyle: true } } },
       scales: {
         x: { ticks: { color: '#5a7a9a', font: { size: 10 } }, grid: { color: '#1e3048' } },
@@ -544,6 +622,7 @@ function renderChart(sessions) {
   });
 }
 
+// ── PROGRESS ──
 function pctChange(first, last, lowerIsBetter) {
   if (!first || !last) return null;
   const change = ((last - first) / first) * 100;
@@ -551,8 +630,8 @@ function pctChange(first, last, lowerIsBetter) {
 }
 
 function setProgress(id, barId, pct) {
-  const el = document.getElementById(id);
-  const bar = document.getElementById(barId);
+  const el = document.getElementById(id), bar = document.getElementById(barId);
+  if (!el) return;
   if (pct === null) { el.textContent = '–'; el.className = 'progress-pct neu'; bar.style.width = '0%'; return; }
   const r = Math.round(pct);
   el.textContent = (r > 0 ? '+' : '') + r + '%';
@@ -577,16 +656,15 @@ function renderProgress(sessions) {
   const days = Object.keys(byDay).sort();
   if (days.length < 2) return;
   const f = byDay[days[0]], l = byDay[days[days.length-1]];
-
   const sum = arr => arr.reduce((a,b)=>a+b,0);
-  setProgress('pL-edit', 'bL-edit', pctChange(avg(f.lEdit), avg(l.lEdit), true));
-  setProgress('pL-aim',  'bL-aim',  pctChange(avg(f.lAim),  avg(l.lAim),  false));
-  setProgress('pL-box',  'bL-box',  pctChange(sum(f.lBox),  sum(l.lBox),  false));
-  setProgress('pL-zone', 'bL-zone', pctChange(sum(f.lZone), sum(l.lZone), false));
-  setProgress('pJ-edit', 'bJ-edit', pctChange(avg(f.jEdit), avg(l.jEdit), true));
-  setProgress('pJ-aim',  'bJ-aim',  pctChange(avg(f.jAim),  avg(l.jAim),  false));
-  setProgress('pJ-box',  'bJ-box',  pctChange(sum(f.jBox),  sum(l.jBox),  false));
-  setProgress('pJ-zone', 'bJ-zone', pctChange(sum(f.jZone), sum(l.jZone), false));
+  setProgress('pL-edit','bL-edit', pctChange(avg(f.lEdit), avg(l.lEdit), true));
+  setProgress('pL-aim', 'bL-aim',  pctChange(avg(f.lAim),  avg(l.lAim),  false));
+  setProgress('pL-box', 'bL-box',  pctChange(sum(f.lBox),  sum(l.lBox),  false));
+  setProgress('pL-zone','bL-zone', pctChange(sum(f.lZone), sum(l.lZone), false));
+  setProgress('pJ-edit','bJ-edit', pctChange(avg(f.jEdit), avg(l.jEdit), true));
+  setProgress('pJ-aim', 'bJ-aim',  pctChange(avg(f.jAim),  avg(l.jAim),  false));
+  setProgress('pJ-box', 'bJ-box',  pctChange(sum(f.jBox),  sum(l.jBox),  false));
+  setProgress('pJ-zone','bJ-zone', pctChange(sum(f.jZone), sum(l.jZone), false));
 }
 
 function renderImprovement(sessions) {
@@ -599,18 +677,13 @@ function renderImprovement(sessions) {
   });
   const days = Object.keys(byDay).sort();
   if (days.length < 2) { el.textContent = 'Spara data på minst 2 olika dagar för att se förbättring.'; return; }
-
   const f = byDay[days[0]], l = byDay[days[days.length-1]];
-  const pL = avg(f.lEdit) - avg(l.lEdit);
-  const pJ = avg(f.jEdit) - avg(l.jEdit);
-
+  const pL = avg(f.lEdit) - avg(l.lEdit), pJ = avg(f.jEdit) - avg(l.jEdit);
   if (pL > pJ)      el.textContent = 'Lucas har förbättrats mest!';
   else if (pJ > pL) el.textContent = 'Jonte har förbättrats mest!';
   else              el.textContent = 'Ni har förbättrats lika mycket!';
-
-  const lastL = avg(l.lEdit), lastJ = avg(l.jEdit);
-  document.getElementById('statLucas').textContent = lastL ? secsToDisplay(lastL) : '–';
-  document.getElementById('statJonte').textContent = lastJ ? secsToDisplay(lastJ) : '–';
+  document.getElementById('statLucas').textContent = avg(l.lEdit) ? secsToDisplay(avg(l.lEdit)) : '–';
+  document.getElementById('statJonte').textContent = avg(l.jEdit) ? secsToDisplay(avg(l.jEdit)) : '–';
 }
 
 async function loadAll() {
@@ -622,12 +695,10 @@ async function loadAll() {
   await loadLogs();
 }
 
+// ── INIT ──
 loadAll();
 setInterval(loadAll, 30000);
-
-// Init Lucide icons
-document.addEventListener('DOMContentLoaded', () => { if(window.lucide) lucide.createIcons(); });
-setTimeout(() => { if(window.lucide) lucide.createIcons(); }, 500);
+setTimeout(() => { if(window.lucide) lucide.createIcons(); }, 100);
 </script>
 </body>
 </html>
