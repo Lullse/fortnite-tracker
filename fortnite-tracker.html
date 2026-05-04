@@ -6,6 +6,7 @@
 <title>Fortnite Tracker – Lucas & Jonte</title>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 <style>
   :root {
     --bg: #080c14;
@@ -51,6 +52,7 @@
   .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); transition: background 0.3s; }
   .dot.live { background: var(--success); box-shadow: 0 0 8px var(--success); }
   .container { max-width: 900px; margin: 0 auto; padding: 20px 16px 60px; }
+
   .card {
     background: var(--card); border: 1px solid var(--border);
     border-radius: var(--radius); padding: 20px; margin-bottom: 16px;
@@ -65,6 +67,8 @@
     letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent);
     margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
   }
+  .card-title i { width: 16px; height: 16px; }
+
   .player-header { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px; }
   .player-label {
     text-align: center; font-size: 11px; font-weight: 500;
@@ -73,7 +77,9 @@
   .player-label.lucas { color: var(--lucas); background: rgba(0,212,255,0.08); }
   .player-label.jonte { color: var(--jonte); background: rgba(255,107,53,0.08); }
   .player-label.level { color: var(--muted); }
+
   .input-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px; align-items: center; }
+
   .level-badge {
     text-align: center; font-size: 12px; font-weight: 500;
     padding: 10px 6px; border-radius: 8px; color: var(--muted);
@@ -84,6 +90,13 @@
   .level-badge.hard    { color: #fb923c; border-color: rgba(251,146,60,0.2); }
   .level-badge.vhard   { color: #f87171; border-color: rgba(248,113,113,0.2); }
   .level-badge.impossible { color: #c084fc; border-color: rgba(192,132,252,0.2); }
+
+  .input-wrap { position: relative; }
+  .input-wrap .calc-result {
+    position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+    font-size: 10px; color: var(--success); font-weight: 600; pointer-events: none;
+  }
+
   input[type="text"] {
     width: 100%; padding: 10px 12px; background: var(--surface);
     border: 1px solid var(--border); border-radius: 8px; color: var(--text);
@@ -92,7 +105,16 @@
   }
   input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(0,212,255,0.12); }
   input.jonte-input:focus { border-color: var(--jonte); box-shadow: 0 0 0 2px rgba(255,107,53,0.12); }
-  input::placeholder { color: var(--muted); font-size: 12px; }
+  input::placeholder { color: var(--muted); font-size: 11px; }
+
+  .edit-hint {
+    font-size: 11px; color: var(--muted); text-align: center;
+    margin-bottom: 10px; padding: 6px 10px; background: var(--surface);
+    border-radius: 8px; border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .edit-hint i { width: 12px; height: 12px; color: var(--accent); }
+
   .btn { padding: 12px 24px; border: none; border-radius: 10px; font-family: 'Rajdhani', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 1px; cursor: pointer; transition: all 0.2s; }
   .btn-primary { background: linear-gradient(135deg, var(--accent), #0090b8); color: #000; width: 100%; }
   .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
@@ -184,7 +206,7 @@
 
   <!-- FÖRBÄTTRING -->
   <div class="card">
-    <div class="card-title"><span>🏆</span> Vem har förbättrats mest?</div>
+    <div class="card-title"><i data-lucide="trophy"></i> Vem har förbättrats mest?</div>
     <div class="improvement-banner" id="improvement">Laddar...</div>
     <div class="stats-row">
       <div class="stat-box">
@@ -198,78 +220,78 @@
     </div>
   </div>
 
-  <!-- PROGRESS PER KATEGORI -->
+  <!-- PROGRESS -->
   <div class="card">
-    <div class="card-title"><span>📊</span> Förbättring per kategori</div>
+    <div class="card-title"><i data-lucide="bar-chart-2"></i> Förbättring per kategori</div>
     <div class="progress-grid">
       <div class="progress-card">
         <div class="progress-label">Lucas</div>
-        <div class="progress-row">
-          <div class="progress-row-header"><span class="progress-name">Edit (tid)</span><span class="progress-pct neu" id="pL-edit">–</span></div>
-          <div class="bar-track"><div class="bar-fill bar-lucas" id="bL-edit" style="width:0%"></div></div>
-        </div>
-        <div class="progress-row">
-          <div class="progress-row-header"><span class="progress-name">Aim (poäng)</span><span class="progress-pct neu" id="pL-aim">–</span></div>
-          <div class="bar-track"><div class="bar-fill bar-lucas" id="bL-aim" style="width:0%"></div></div>
-        </div>
-        <div class="progress-row">
-          <div class="progress-row-header"><span class="progress-name">Box Fight</span><span class="progress-pct neu" id="pL-box">–</span></div>
-          <div class="bar-track"><div class="bar-fill bar-lucas" id="bL-box" style="width:0%"></div></div>
-        </div>
-        <div class="progress-row">
-          <div class="progress-row-header"><span class="progress-name">Zone Wars</span><span class="progress-pct neu" id="pL-zone">–</span></div>
-          <div class="bar-track"><div class="bar-fill bar-lucas" id="bL-zone" style="width:0%"></div></div>
-        </div>
+        <div class="progress-row"><div class="progress-row-header"><span class="progress-name">Edit (tid)</span><span class="progress-pct neu" id="pL-edit">–</span></div><div class="bar-track"><div class="bar-fill bar-lucas" id="bL-edit" style="width:0%"></div></div></div>
+        <div class="progress-row"><div class="progress-row-header"><span class="progress-name">Aim (poäng)</span><span class="progress-pct neu" id="pL-aim">–</span></div><div class="bar-track"><div class="bar-fill bar-lucas" id="bL-aim" style="width:0%"></div></div></div>
+        <div class="progress-row"><div class="progress-row-header"><span class="progress-name">Box Fight</span><span class="progress-pct neu" id="pL-box">–</span></div><div class="bar-track"><div class="bar-fill bar-lucas" id="bL-box" style="width:0%"></div></div></div>
+        <div class="progress-row"><div class="progress-row-header"><span class="progress-name">Zone Wars</span><span class="progress-pct neu" id="pL-zone">–</span></div><div class="bar-track"><div class="bar-fill bar-lucas" id="bL-zone" style="width:0%"></div></div></div>
       </div>
       <div class="progress-card">
         <div class="progress-label">Jonte</div>
-        <div class="progress-row">
-          <div class="progress-row-header"><span class="progress-name">Edit (tid)</span><span class="progress-pct neu" id="pJ-edit">–</span></div>
-          <div class="bar-track"><div class="bar-fill bar-jonte" id="bJ-edit" style="width:0%"></div></div>
-        </div>
-        <div class="progress-row">
-          <div class="progress-row-header"><span class="progress-name">Aim (poäng)</span><span class="progress-pct neu" id="pJ-aim">–</span></div>
-          <div class="bar-track"><div class="bar-fill bar-jonte" id="bJ-aim" style="width:0%"></div></div>
-        </div>
-        <div class="progress-row">
-          <div class="progress-row-header"><span class="progress-name">Box Fight</span><span class="progress-pct neu" id="pJ-box">–</span></div>
-          <div class="bar-track"><div class="bar-fill bar-jonte" id="bJ-box" style="width:0%"></div></div>
-        </div>
-        <div class="progress-row">
-          <div class="progress-row-header"><span class="progress-name">Zone Wars</span><span class="progress-pct neu" id="pJ-zone">–</span></div>
-          <div class="bar-track"><div class="bar-fill bar-jonte" id="bJ-zone" style="width:0%"></div></div>
-        </div>
+        <div class="progress-row"><div class="progress-row-header"><span class="progress-name">Edit (tid)</span><span class="progress-pct neu" id="pJ-edit">–</span></div><div class="bar-track"><div class="bar-fill bar-jonte" id="bJ-edit" style="width:0%"></div></div></div>
+        <div class="progress-row"><div class="progress-row-header"><span class="progress-name">Aim (poäng)</span><span class="progress-pct neu" id="pJ-aim">–</span></div><div class="bar-track"><div class="bar-fill bar-jonte" id="bJ-aim" style="width:0%"></div></div></div>
+        <div class="progress-row"><div class="progress-row-header"><span class="progress-name">Box Fight</span><span class="progress-pct neu" id="pJ-box">–</span></div><div class="bar-track"><div class="bar-fill bar-jonte" id="bJ-box" style="width:0%"></div></div></div>
+        <div class="progress-row"><div class="progress-row-header"><span class="progress-name">Zone Wars</span><span class="progress-pct neu" id="pJ-zone">–</span></div><div class="bar-track"><div class="bar-fill bar-jonte" id="bJ-zone" style="width:0%"></div></div></div>
       </div>
     </div>
-    <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:4px">Första dag vs senaste dag. Edit: lägre tid = bättre. Aim/Box/Zone: fler poäng/vinster = bättre.</p>
+    <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:4px">Första dag vs senaste dag. Edit: kortare tid = bättre. Aim/Box/Zone: fler = bättre.</p>
   </div>
 
   <!-- CHART -->
   <div class="card">
-    <div class="card-title"><span>📈</span> Utveckling över tid (edit-snitt per dag)</div>
+    <div class="card-title"><i data-lucide="trending-up"></i> Utveckling över tid (edit-snitt per dag)</div>
     <div class="chart-wrap">
-      <canvas id="chart" role="img" aria-label="Linjediagram över Lucas och Jontes edit-snitt per dag">Ingen data ännu.</canvas>
+      <canvas id="chart" role="img" aria-label="Linjediagram över edit-snitt per dag">Ingen data ännu.</canvas>
     </div>
   </div>
 
-  <!-- EDIT -->
+  <!-- EDIT TRÄNING -->
   <div class="card">
-    <div class="card-title"><span>✏️</span> Edit Träning – Tider (sekunder)</div>
+    <div class="card-title"><i data-lucide="pencil"></i> Edit Träning</div>
+    <div class="edit-hint">
+      <i data-lucide="info"></i>
+      Skriv in vad klockan visade när du var klar — appen räknar ut din tid (10:00 minus din tid)
+    </div>
     <div class="player-header">
       <div class="player-label level">Nivå</div>
       <div class="player-label lucas">Lucas</div>
       <div class="player-label jonte">Jonte</div>
     </div>
-    <div class="input-row"><div class="level-badge easy">Easy</div><input type="text" class="lEdit" placeholder="t.ex. 12"><input type="text" class="jEdit jonte-input" placeholder="t.ex. 15"></div>
-    <div class="input-row"><div class="level-badge medium">Medium</div><input type="text" class="lEdit" placeholder="–"><input type="text" class="jEdit jonte-input" placeholder="–"></div>
-    <div class="input-row"><div class="level-badge hard">Hard</div><input type="text" class="lEdit" placeholder="–"><input type="text" class="jEdit jonte-input" placeholder="–"></div>
-    <div class="input-row"><div class="level-badge vhard">Very Hard</div><input type="text" class="lEdit" placeholder="–"><input type="text" class="jEdit jonte-input" placeholder="–"></div>
-    <div class="input-row"><div class="level-badge impossible">Impossible</div><input type="text" class="lEdit" placeholder="–"><input type="text" class="jEdit jonte-input" placeholder="–"></div>
+    <div class="input-row">
+      <div class="level-badge easy">Easy</div>
+      <div class="input-wrap"><input type="text" class="lEdit" placeholder="t.ex. 8:23" oninput="calcEdit(this,'rLE0')"><span class="calc-result" id="rLE0"></span></div>
+      <div class="input-wrap"><input type="text" class="jEdit jonte-input" placeholder="t.ex. 7:45" oninput="calcEdit(this,'rJE0')"><span class="calc-result" id="rJE0"></span></div>
+    </div>
+    <div class="input-row">
+      <div class="level-badge medium">Medium</div>
+      <div class="input-wrap"><input type="text" class="lEdit" placeholder="t.ex. 8:23" oninput="calcEdit(this,'rLE1')"><span class="calc-result" id="rLE1"></span></div>
+      <div class="input-wrap"><input type="text" class="jEdit jonte-input" placeholder="t.ex. 7:45" oninput="calcEdit(this,'rJE1')"><span class="calc-result" id="rJE1"></span></div>
+    </div>
+    <div class="input-row">
+      <div class="level-badge hard">Hard</div>
+      <div class="input-wrap"><input type="text" class="lEdit" placeholder="t.ex. 8:23" oninput="calcEdit(this,'rLE2')"><span class="calc-result" id="rLE2"></span></div>
+      <div class="input-wrap"><input type="text" class="jEdit jonte-input" placeholder="t.ex. 7:45" oninput="calcEdit(this,'rJE2')"><span class="calc-result" id="rJE2"></span></div>
+    </div>
+    <div class="input-row">
+      <div class="level-badge vhard">Very Hard</div>
+      <div class="input-wrap"><input type="text" class="lEdit" placeholder="t.ex. 8:23" oninput="calcEdit(this,'rLE3')"><span class="calc-result" id="rLE3"></span></div>
+      <div class="input-wrap"><input type="text" class="jEdit jonte-input" placeholder="t.ex. 7:45" oninput="calcEdit(this,'rJE3')"><span class="calc-result" id="rJE3"></span></div>
+    </div>
+    <div class="input-row">
+      <div class="level-badge impossible">Impossible</div>
+      <div class="input-wrap"><input type="text" class="lEdit" placeholder="t.ex. 8:23" oninput="calcEdit(this,'rLE4')"><span class="calc-result" id="rLE4"></span></div>
+      <div class="input-wrap"><input type="text" class="jEdit jonte-input" placeholder="t.ex. 7:45" oninput="calcEdit(this,'rJE4')"><span class="calc-result" id="rJE4"></span></div>
+    </div>
   </div>
 
   <!-- AIM -->
   <div class="card">
-    <div class="card-title"><span>🎯</span> Aim Training – Poäng</div>
+    <div class="card-title"><i data-lucide="crosshair"></i> Aim Training – Poäng</div>
     <div class="player-header">
       <div class="player-label level">Kör</div>
       <div class="player-label lucas">Lucas</div>
@@ -281,27 +303,27 @@
 
   <!-- BOX FIGHT -->
   <div class="card">
-    <div class="card-title"><span>📦</span> Box Fight – Vinster</div>
+    <div class="card-title"><i data-lucide="box"></i> Box Fight – Vinster</div>
     <div class="player-header"><div class="player-label level"></div><div class="player-label lucas">Lucas</div><div class="player-label jonte">Jonte</div></div>
     <div class="input-row"><div class="level-badge" style="color:var(--muted)">Idag</div><input type="text" id="lBox" placeholder="0"><input type="text" id="jBox" class="jonte-input" placeholder="0"></div>
   </div>
 
   <!-- ZONE WARS -->
   <div class="card">
-    <div class="card-title"><span>🌀</span> Zone Wars – Vinster</div>
+    <div class="card-title"><i data-lucide="zap"></i> Zone Wars – Vinster</div>
     <div class="player-header"><div class="player-label level"></div><div class="player-label lucas">Lucas</div><div class="player-label jonte">Jonte</div></div>
     <div class="input-row"><div class="level-badge" style="color:var(--muted)">Idag</div><input type="text" id="lZone" placeholder="0"><input type="text" id="jZone" class="jonte-input" placeholder="0"></div>
   </div>
 
   <!-- SPARA -->
   <div class="card">
-    <div class="card-title"><span>💾</span> Spara denna körning</div>
+    <div class="card-title"><i data-lucide="save"></i> Spara denna körning</div>
     <button class="btn btn-primary" onclick="saveDay()">SPARA</button>
   </div>
 
   <!-- DAGBOK -->
   <div class="card">
-    <div class="card-title"><span>📝</span> Vad har ni gjort idag?</div>
+    <div class="card-title"><i data-lucide="notebook-pen"></i> Vad har ni gjort idag?</div>
     <div class="log-row">
       <input type="text" id="logInput" placeholder="Skriv vad ni tränade på...">
       <button class="btn btn-small" onclick="addLog()">Lägg till</button>
@@ -311,7 +333,7 @@
 
   <!-- HISTORIK -->
   <div class="card">
-    <div class="card-title"><span>📅</span> Historik</div>
+    <div class="card-title"><i data-lucide="calendar"></i> Historik</div>
     <div id="history"></div>
   </div>
 
@@ -323,12 +345,48 @@
 // ════════════════════════════════════════════
 // ⚠️  KLISTRA IN DINA SUPABASE-UPPGIFTER HÄR
 // ════════════════════════════════════════════
-const SUPABASE_URL = 'DIN_PROJECT_URL_HÄR';
-const SUPABASE_KEY = 'DIN_PUBLISHABLE_KEY_HÄR';
+const SUPABASE_URL = 'https://ioonrlbuhwjvyzjgxwjp.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlvb25ybGJ1aHdqdnl6amd4d2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTgxNzgsImV4cCI6MjA5MzQzNDE3OH0.sQiJoCBIAg1QbHoTB-v4TKAxa9Eje3Wp4GcG05IJl6Q';
 // ════════════════════════════════════════════
 
 const API = `${SUPABASE_URL}/rest/v1`;
 const HEADS = { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=representation' };
+
+// ── EDIT TID-KALKYL: 10:00 minus vad klockan visade ──
+// Input: "8:23" → 10:00 - 8:23 = 1:37 = 97 sekunder
+function parseEditTime(val) {
+  val = val.trim();
+  const parts = val.split(':');
+  if (parts.length !== 2) return null;
+  const m = parseInt(parts[0]);
+  const s = parseInt(parts[1]);
+  if (isNaN(m) || isNaN(s)) return null;
+  const remaining = m * 60 + s;
+  const totalSecs = 10 * 60 - remaining; // 10 min minus kvarvarande
+  if (totalSecs <= 0 || totalSecs >= 600) return null;
+  return totalSecs;
+}
+
+function secsToDisplay(secs) {
+  if (!secs) return null;
+  const m = Math.floor(secs / 60);
+  const s = secs % 60;
+  return m > 0 ? `${m}:${String(s).padStart(2,'0')}` : `${s}s`;
+}
+
+function calcEdit(input, resultId) {
+  const secs = parseEditTime(input.value);
+  const el = document.getElementById(resultId);
+  if (secs) {
+    el.textContent = '= ' + secsToDisplay(secs);
+  } else {
+    el.textContent = '';
+  }
+}
+
+function getEditSeconds(inputs) {
+  return [...inputs].map(i => parseEditTime(i.value)).filter(x => x !== null);
+}
 
 function setSync(live) {
   document.getElementById('syncDot').className = 'dot' + (live ? ' live' : '');
@@ -366,8 +424,10 @@ function toast(msg) {
 }
 
 async function saveDay() {
-  const lEdit = [...document.querySelectorAll('.lEdit')].map(i=>i.value);
-  const jEdit = [...document.querySelectorAll('.jEdit')].map(i=>i.value);
+  const lEditInputs = document.querySelectorAll('.lEdit');
+  const jEditInputs = document.querySelectorAll('.jEdit');
+  const lEditSecs = getEditSeconds(lEditInputs);
+  const jEditSecs = getEditSeconds(jEditInputs);
   const lAim  = [...document.querySelectorAll('.lAim')].map(i=>i.value);
   const jAim  = [...document.querySelectorAll('.jAim')].map(i=>i.value);
   const lBox  = document.getElementById('lBox').value;
@@ -377,7 +437,7 @@ async function saveDay() {
 
   const ok = await dbInsert('sessions', {
     date: today(), time: timeNow(),
-    l_edit: lEdit, j_edit: jEdit,
+    l_edit: lEditSecs, j_edit: jEditSecs,
     l_aim: lAim, j_aim: jAim,
     l_box: Number(lBox)||0, j_box: Number(jBox)||0,
     l_zone: Number(lZone)||0, j_zone: Number(jZone)||0
@@ -387,6 +447,8 @@ async function saveDay() {
     toast('✓ Körning sparad!');
     document.querySelectorAll('.lEdit,.jEdit,.lAim,.jAim').forEach(i=>i.value='');
     ['lBox','jBox','lZone','jZone'].forEach(id=>document.getElementById(id).value='');
+    // Clear calc results
+    document.querySelectorAll('.calc-result').forEach(el=>el.textContent='');
     await loadAll();
   } else {
     toast('❌ Fel – kontrollera Supabase');
@@ -414,6 +476,11 @@ async function loadLogs() {
   `).join('');
 }
 
+function fmtEditArr(arr) {
+  if (!arr || !arr.length) return '–';
+  return arr.map(s => secsToDisplay(Number(s))).filter(Boolean).join(', ') || '–';
+}
+
 function renderHistory(sessions) {
   const div = document.getElementById('history');
   if (!sessions.length) { div.innerHTML = '<p style="color:var(--muted);font-size:13px">Inga körningar sparade än.</p>'; return; }
@@ -426,13 +493,13 @@ function renderHistory(sessions) {
 
   div.innerHTML = Object.entries(byDay).map(([date, runs]) => `
     <div class="history-day">
-      <div class="history-day-header">📅 ${date} — ${runs.length} körning${runs.length>1?'ar':''}</div>
+      <div class="history-day-header">${date} — ${runs.length} körning${runs.length>1?'ar':''}</div>
       ${runs.map((s, i) => `
         <div class="history-run">
           <div class="history-run-time">KÖR ${runs.length - i} • ${s.time||''}</div>
           <div class="history-grid">
-            <div class="hp" style="color:var(--lucas)">Lucas edit: <span>${(s.l_edit||[]).filter(x=>x).join(', ')||'–'}</span></div>
-            <div class="hp" style="color:var(--jonte)">Jonte edit: <span>${(s.j_edit||[]).filter(x=>x).join(', ')||'–'}</span></div>
+            <div class="hp" style="color:var(--lucas)">Lucas edit: <span>${fmtEditArr(s.l_edit)}</span></div>
+            <div class="hp" style="color:var(--jonte)">Jonte edit: <span>${fmtEditArr(s.j_edit)}</span></div>
             <div class="hp" style="color:var(--lucas)">Lucas aim: <span>${(s.l_aim||[]).filter(x=>x).join(', ')||'–'}</span></div>
             <div class="hp" style="color:var(--jonte)">Jonte aim: <span>${(s.j_aim||[]).filter(x=>x).join(', ')||'–'}</span></div>
             <div class="hp" style="color:var(--lucas)">Lucas box: <span>${s.l_box??'–'}</span> · zone: <span>${s.l_zone??'–'}</span></div>
@@ -536,13 +603,13 @@ function renderImprovement(sessions) {
   const pL = avg(f.lEdit) - avg(l.lEdit);
   const pJ = avg(f.jEdit) - avg(l.jEdit);
 
-  if (pL > pJ)      el.textContent = '🔥 Lucas har förbättrats mest!';
-  else if (pJ > pL) el.textContent = '🔥 Jonte har förbättrats mest!';
-  else              el.textContent = '⚖️ Ni har förbättrats lika mycket!';
+  if (pL > pJ)      el.textContent = 'Lucas har förbättrats mest!';
+  else if (pJ > pL) el.textContent = 'Jonte har förbättrats mest!';
+  else              el.textContent = 'Ni har förbättrats lika mycket!';
 
   const lastL = avg(l.lEdit), lastJ = avg(l.jEdit);
-  document.getElementById('statLucas').textContent = lastL ? lastL + 's' : '–';
-  document.getElementById('statJonte').textContent = lastJ ? lastJ + 's' : '–';
+  document.getElementById('statLucas').textContent = lastL ? secsToDisplay(lastL) : '–';
+  document.getElementById('statJonte').textContent = lastJ ? secsToDisplay(lastJ) : '–';
 }
 
 async function loadAll() {
@@ -556,6 +623,10 @@ async function loadAll() {
 
 loadAll();
 setInterval(loadAll, 30000);
+
+// Init Lucide icons
+document.addEventListener('DOMContentLoaded', () => { if(window.lucide) lucide.createIcons(); });
+setTimeout(() => { if(window.lucide) lucide.createIcons(); }, 500);
 </script>
 </body>
 </html>
