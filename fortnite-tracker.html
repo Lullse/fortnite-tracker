@@ -1134,7 +1134,7 @@ function renderFnStats(lData, jData) {
   const div = document.getElementById('fn-stats-content');
 
   function playerHTML(data, player) {
-    if (!data || data.status !== 'OK') {
+    if (!data || !data.data?.account) {
       return `<div class="fn-player-card">
         <div class="fn-player-name ${player}">${player === 'lucas' ? 'Lucas' : 'Jonte'}</div>
         <div class="fn-error">Kunde inte hämta data. Kontrollera att kontot är publikt.</div>
