@@ -241,6 +241,13 @@ header { padding: 22px 20px 0; text-align: center; position: sticky; top: 0; z-i
   .cat-btn { padding:4px 12px; border:1px solid var(--border); border-radius:20px; background:var(--surface); color:var(--muted); font-size:11px; cursor:pointer; transition:all 0.15s; }
   .cat-btn:hover { color:var(--text); }
   .cat-btn.active { border-color:#7dd3fc; color:#7dd3fc; background:rgba(125,211,252,0.07); }
+
+/* ── FN CONTROLS ── */
+.fn-controls { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+.fn-toggle-group { display: flex; flex-wrap: wrap; gap: 5px; }
+.fn-toggle { padding: 4px 11px; border: 1px solid var(--border); border-radius: 20px; background: var(--surface); color: var(--muted); font-size: 11px; font-family: Inter,sans-serif; cursor: pointer; transition: all 0.15s; }
+.fn-toggle:hover { color: var(--text); }
+.fn-toggle.active { border-color: var(--warn); color: var(--warn); background: rgba(250,204,21,0.07); }
 </style>
 </head>
 <body>
@@ -294,7 +301,6 @@ header { padding: 22px 20px 0; text-align: center; position: sticky; top: 0; z-i
         <div class="prow"><div class="prow-header"><span class="prow-name">Aim</span><span class="ppct neu" id="pL-aim">–</span></div><div class="bar-track"><div class="bar-fill bar-l" id="bL-aim" style="width:0%"></div></div></div>
         <div class="prow"><div class="prow-header"><span class="prow-name">Box Fight</span><span class="ppct neu" id="pL-box">–</span></div><div class="bar-track"><div class="bar-fill bar-l" id="bL-box" style="width:0%"></div></div></div>
         <div class="prow"><div class="prow-header"><span class="prow-name">Zone Wars</span><span class="ppct neu" id="pL-zone">–</span></div><div class="bar-track"><div class="bar-fill bar-l" id="bL-zone" style="width:0%"></div></div></div>
-        <div class="prow"><div class="prow-header"><span class="prow-name">Matcher (W%)</span><span class="ppct neu" id="pL-matches">–</span></div><div class="bar-track"><div class="bar-fill bar-l" id="bL-matches" style="width:0%"></div></div></div>
       </div>
       <div class="progress-card">
         <div class="progress-card-title jonte">Jonte</div>
@@ -302,7 +308,6 @@ header { padding: 22px 20px 0; text-align: center; position: sticky; top: 0; z-i
         <div class="prow"><div class="prow-header"><span class="prow-name">Aim</span><span class="ppct neu" id="pJ-aim">–</span></div><div class="bar-track"><div class="bar-fill bar-j" id="bJ-aim" style="width:0%"></div></div></div>
         <div class="prow"><div class="prow-header"><span class="prow-name">Box Fight</span><span class="ppct neu" id="pJ-box">–</span></div><div class="bar-track"><div class="bar-fill bar-j" id="bJ-box" style="width:0%"></div></div></div>
         <div class="prow"><div class="prow-header"><span class="prow-name">Zone Wars</span><span class="ppct neu" id="pJ-zone">–</span></div><div class="bar-track"><div class="bar-fill bar-j" id="bJ-zone" style="width:0%"></div></div></div>
-        <div class="prow"><div class="prow-header"><span class="prow-name">Matcher (W%)</span><span class="ppct neu" id="pJ-matches">–</span></div><div class="bar-track"><div class="bar-fill bar-j" id="bJ-matches" style="width:0%"></div></div></div>
       </div>
     </div>
     <p style="font-size:10px;color:var(--muted);text-align:center;margin-top:8px">Första dag vs senaste dag</p>
@@ -339,12 +344,6 @@ header { padding: 22px 20px 0; text-align: center; position: sticky; top: 0; z-i
   <div class="card accent-both">
     <div class="card-title c-both"><i data-lucide="calendar"></i> Träningshistorik</div>
     <div id="history"></div>
-  </div>
-
-  <!-- Matchhistorik -->
-  <div class="card accent-both">
-    <div class="card-title c-both"><i data-lucide="gamepad-2"></i> Matchhistorik</div>
-    <div id="match-history"></div>
   </div>
 
 </div>
@@ -391,33 +390,7 @@ header { padding: 22px 20px 0; text-align: center; position: sticky; top: 0; z-i
     </div>
   </div>
 
-  <!-- Matcher -->
-  <div class="card accent-lucas">
-    <div class="card-title c-lucas"><i data-lucide="gamepad-2"></i> Dagens matcher</div>
-    <div class="field" style="margin-bottom:10px">
-      <div class="field-name">Spelläge</div>
-      <select id="lM_mode" style="width:100%;padding:9px 10px;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;font-family:Inter,sans-serif;cursor:pointer">
-        <option value="BR">Battle Royale</option>
-        <option value="BR Ranked">BR Ranked</option>
-        <option value="Reload">Reload</option>
-        <option value="Reload Ranked">Reload Ranked</option>
-        <option value="OG Fortnite">OG Fortnite</option>
-        <option value="Zero Build">Zero Build</option>
-        <option value="Zero Build Ranked">Zero Build Ranked</option>
-        <option value="Duos">Duos</option>
-        <option value="Squads">Squads</option>
-      </select>
-    </div>
-    <div class="field-grid cols-5" style="margin-bottom:8px">
-      <div class="field"><div class="field-name">Placering</div><input type="text" id="lM_place" class="l" placeholder="t.ex. 1"></div>
-      <div class="field"><div class="field-name">Kills</div><input type="text" id="lM_kills" class="l" placeholder="0"></div>
-      <div class="field"><div class="field-name">Damage</div><input type="text" id="lM_dmg" class="l" placeholder="0"></div>
-      <div class="field"><div class="field-name">Material</div><input type="text" id="lM_mat" class="l" placeholder="0"></div>
-      <div class="field"><div class="field-name">Vinst?</div><input type="text" id="lM_win" class="l" placeholder="ja/nej"></div>
-    </div>
-    <button class="btn btn-ghost" onclick="addMatch('lucas')">+ Lägg till match</button>
-    <div id="lMatches-today" style="margin-top:8px"></div>
-  </div>
+
 
   <!-- Spara -->
   <div class="card accent-lucas">
@@ -485,33 +458,7 @@ header { padding: 22px 20px 0; text-align: center; position: sticky; top: 0; z-i
     </div>
   </div>
 
-  <!-- Matcher -->
-  <div class="card accent-jonte">
-    <div class="card-title c-jonte"><i data-lucide="gamepad-2"></i> Dagens matcher</div>
-    <div class="field" style="margin-bottom:10px">
-      <div class="field-name">Spelläge</div>
-      <select id="jM_mode" style="width:100%;padding:9px 10px;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;font-family:Inter,sans-serif;cursor:pointer">
-        <option value="BR">Battle Royale</option>
-        <option value="BR Ranked">BR Ranked</option>
-        <option value="Reload">Reload</option>
-        <option value="Reload Ranked">Reload Ranked</option>
-        <option value="OG Fortnite">OG Fortnite</option>
-        <option value="Zero Build">Zero Build</option>
-        <option value="Zero Build Ranked">Zero Build Ranked</option>
-        <option value="Duos">Duos</option>
-        <option value="Squads">Squads</option>
-      </select>
-    </div>
-    <div class="field-grid cols-5" style="margin-bottom:8px">
-      <div class="field"><div class="field-name">Placering</div><input type="text" id="jM_place" class="j" placeholder="t.ex. 1"></div>
-      <div class="field"><div class="field-name">Kills</div><input type="text" id="jM_kills" class="j" placeholder="0"></div>
-      <div class="field"><div class="field-name">Damage</div><input type="text" id="jM_dmg" class="j" placeholder="0"></div>
-      <div class="field"><div class="field-name">Material</div><input type="text" id="jM_mat" class="j" placeholder="0"></div>
-      <div class="field"><div class="field-name">Vinst?</div><input type="text" id="jM_win" class="j" placeholder="ja/nej"></div>
-    </div>
-    <button class="btn btn-ghost" onclick="addMatch('jonte')">+ Lägg till match</button>
-    <div id="jMatches-today" style="margin-top:8px"></div>
-  </div>
+
 
   <!-- Spara -->
   <div class="card accent-jonte">
@@ -613,29 +560,9 @@ function toast(msg) {
   setTimeout(() => t.classList.remove('show'), 2500);
 }
 
-// ── MATCH BUFFER (not yet saved) ──
-const matchBuffer = { lucas: [], jonte: [] };
 
-function addMatch(player) {
-  const pre = player === 'lucas' ? 'lM' : 'jM';
-  const place = document.getElementById(`${pre}_place`).value;
-  const kills = document.getElementById(`${pre}_kills`).value;
-  const dmg   = document.getElementById(`${pre}_dmg`).value;
-  const mat   = document.getElementById(`${pre}_mat`).value;
-  const win   = document.getElementById(`${pre}_win`).value.toLowerCase();
-  const mode  = document.getElementById(`${pre}_mode`)?.value || 'BR';
-  if (!place && !kills) return;
 
-  const entry = { place: Number(place)||0, kills: Number(kills)||0, dmg: Number(dmg)||0, mat: Number(mat)||0, win: win === 'ja' || win === 'yes' || win === '1', mode };
-  matchBuffer[player].push(entry);
 
-  // Clear inputs
-  ['place','kills','dmg','mat','win'].forEach(f => document.getElementById(`${pre}_${f}`).value = '');
-
-  // Show in today list
-  renderMatchBuffer(player);
-  toast('✓ Match tillagd!');
-}
 
 function renderMatchBuffer(player) {
   const div = document.getElementById(`${player === 'lucas' ? 'l' : 'j'}Matches-today`);
@@ -657,10 +584,7 @@ function renderMatchBuffer(player) {
   `).join('');
 }
 
-function removeMatchBuffer(player, idx) {
-  matchBuffer[player].splice(idx, 1);
-  renderMatchBuffer(player);
-}
+
 
 // ── SPARA ──
 async function savePlayer(player) {
@@ -687,13 +611,6 @@ async function savePlayer(player) {
     l_box: Number(lBox)||0, j_box: Number(jBox)||0,
     l_zone: Number(lZone)||0, j_zone: Number(jZone)||0
   });
-
-  // Save matches
-  for (const m of matchBuffer[player]) {
-    await dbInsert('matches', { date: today(), time: timeNow(), player, mode: m.mode||'BR', place: m.place, kills: m.kills, dmg: m.dmg, mat: m.mat, win: m.win });
-  }
-  matchBuffer[player] = [];
-  renderMatchBuffer(player);
 
   if (ok) {
     toast(`✓ ${isL ? 'Lucas' : 'Jonte'} – sparat!`);
@@ -806,33 +723,7 @@ function renderHistory(sessions) {
 }
 
 // ── MATCH HISTORY ──
-function renderMatchHistory(matches) {
-  const div = document.getElementById('match-history');
-  if (!matches.length) { div.innerHTML = '<p style="color:var(--muted);font-size:12px">Inga matcher sparade än.</p>'; return; }
-  const byDay = {};
-  [...matches].reverse().forEach(m => { if(!byDay[m.date]) byDay[m.date]=[]; byDay[m.date].push(m); });
 
-  div.innerHTML = Object.entries(byDay).map(([date, ms]) => `
-    <div class="history-day">
-      <div class="history-day-header">${date} — ${ms.length} match${ms.length>1?'er':''}</div>
-      ${ms.map(m => {
-        const color = m.player === 'lucas' ? 'var(--lucas)' : 'var(--jonte)';
-        const placeClass = m.win ? 'win' : m.place <= 5 ? 'top5' : m.place <= 10 ? 'top10' : 'other';
-        return `<div class="match-entry">
-          <div class="match-placement ${placeClass}">#${m.place||'?'}</div>
-          <div class="match-details">
-            <span style="color:${color};font-weight:600;font-size:11px;letter-spacing:1px">${m.player}</span>
-            ${m.mode ? `<span style="color:var(--warn);font-weight:600">${m.mode}</span>` : ''}
-            <span><b style="color:${color}">${m.kills}</b> kills</span>
-            <span><b style="color:${color}">${m.dmg}</b> dmg</span>
-            <span><b style="color:${color}">${m.mat}</b> mat</span>
-            ${m.win ? '<span style="color:var(--success)">🏆 VINST</span>' : ''}
-          </div>
-          <div class="match-date">${m.time||''}</div>
-        </div>`;
-      }).join('')}
-    </div>`).join('');
-}
 
 // ── CHART ──
 let _sessions = [], _matches = [];
@@ -861,7 +752,7 @@ function normVal(val, min, max, invert=false) {
   return Math.round(invert ? 100 - p : p);
 }
 
-function renderChart(sessions, matches) {
+function renderChart(sessions, matches=[]) {
   // Collect all data
   const lEditAll=[], jEditAll=[], lAimAll=[], jAimAll=[];
   const lBoxAll=[], jBoxAll=[], lZoneAll=[], jZoneAll=[];
@@ -890,7 +781,10 @@ function renderChart(sessions, matches) {
   const lBoxSum=lBoxAll.reduce((a,b)=>a+b,0), jBoxSum=jBoxAll.reduce((a,b)=>a+b,0);
   const lZoneSum=lZoneAll.reduce((a,b)=>a+b,0), jZoneSum=jZoneAll.reduce((a,b)=>a+b,0);
   const lKD=avg(lKillsAll), jKD=avg(jKillsAll);
-  const lWR=lTotal?Math.round(lWins/lTotal*100):0, jWR=jTotal?Math.round(jWins/jTotal*100):0;
+  const lApiO = _fnCache[_fnTimeWindow]?.l?.data?.stats?.all?.overall;
+  const jApiO = _fnCache[_fnTimeWindow]?.j?.data?.stats?.all?.overall;
+  const lWR = lApiO?.winRate ? Math.round(lApiO.winRate) : (lTotal?Math.round(lWins/lTotal*100):0);
+  const jWR = jApiO?.winRate ? Math.round(jApiO.winRate) : (jTotal?Math.round(jWins/jTotal*100):0);
 
   // Normalize each axis 0-100
   const editMin=Math.min(lEditAvg||999,jEditAvg||999), editMax=Math.max(lEditAvg||0,jEditAvg||0,editMin+1);
@@ -946,18 +840,14 @@ function renderChart(sessions, matches) {
     lData=[normVal(lZoneSum,0,zMax),normVal(avg(lZVals),0,zavgMax)];
     jData=[normVal(jZoneSum,0,zMax),normVal(avg(jZVals),0,zavgMax)];
   } else if (cat === 'matches') {
-    // Break down by game mode
-    const modes = ['BR','BR Ranked','Reload','Reload Ranked','OG Fortnite','Zero Build'];
-    radarLabels = modes;
-    const lModeW={}, jModeW={}, lModeT={}, jModeT={};
-    modes.forEach(m=>{lModeW[m]=0;jModeW[m]=0;lModeT[m]=0;jModeT[m]=0;});
-    matches.forEach(m=>{
-      const mo=m.mode||'BR';
-      if(m.player==='lucas'){lModeT[mo]=(lModeT[mo]||0)+1;if(m.win)lModeW[mo]=(lModeW[mo]||0)+1;}
-      if(m.player==='jonte'){jModeT[mo]=(jModeT[mo]||0)+1;if(m.win)jModeW[mo]=(jModeW[mo]||0)+1;}
-    });
-    lData=modes.map(m=>lModeT[m]?Math.round(lModeW[m]/lModeT[m]*100):0);
-    jData=modes.map(m=>jModeT[m]?Math.round(jModeW[m]/jModeT[m]*100):0);
+    // Use API data for match breakdown
+    const lApi = _fnCache[_fnTimeWindow]?.l?.data?.stats?.all || {};
+    const jApi = _fnCache[_fnTimeWindow]?.j?.data?.stats?.all || {};
+    radarLabels = ['Totalt','Solo','Duos','Trios','Squads'];
+    const lSrc = [lApi.overall,lApi.solo,lApi.duos,lApi.trios,lApi.squads];
+    const jSrc = [jApi.overall,jApi.solo,jApi.duos,jApi.trios,jApi.squads];
+    lData = lSrc.map(s => s?.winRate ? Math.round(s.winRate) : 0);
+    jData = jSrc.map(s => s?.winRate ? Math.round(s.winRate) : 0);
   } else {
     radarLabels = ['Edit','Aim','Box Fight','Zone Wars','Kills/match','Win%'];
     lData = [normVal(lEditAvg,editMin,editMax,true),normVal(lAimAvg,0,aimMax),normVal(lBoxSum,0,boxMax),normVal(lZoneSum,0,zoneMax),normVal(lKD,0,kdMax),lWR];
@@ -1042,7 +932,7 @@ function setProg(id, bid, p) {
   bar.style.width=Math.min(Math.abs(r),100)+'%';
 }
 
-function renderProgress(sessions, matches) {
+function renderProgress(sessions, matches=[]) {
   const byDay={};
   sessions.forEach(s=>{
     if(!byDay[s.date]) byDay[s.date]={lEdit:[],jEdit:[],lAim:[],jAim:[],lBox:[],jBox:[],lZone:[],jZone:[]};
@@ -1107,103 +997,166 @@ function renderImprovement(sessions, matches) {
   document.getElementById('statLucas').textContent=lastL?secsToDisplay(lastL):'–';
   document.getElementById('statJonte').textContent=lastJ?secsToDisplay(lastJ):'–';
 
-  // Win counts
-  let lW=0,jW=0;
-  matches.forEach(m=>{if(m.win&&m.player==='lucas')lW++;if(m.win&&m.player==='jonte')jW++;});
-  document.getElementById('statLucasW').textContent=lW||'–';
-  document.getElementById('statJonteW').textContent=jW||'–';
+  // Win counts from API cache
+  const lApiData = _fnCache[_fnTimeWindow]?.l?.data?.stats?.all?.overall;
+  const jApiData = _fnCache[_fnTimeWindow]?.j?.data?.stats?.all?.overall;
+  document.getElementById('statLucasW').textContent = lApiData?.wins ?? '–';
+  document.getElementById('statJonteW').textContent = jApiData?.wins ?? '–';
 }
 
 
 // ── FORTNITE API ──
 const FN_API_KEY = '28d08fd5-4871-46b7-a2dd-52907b2d8db4';
-const FN_PLAYERS = {
-  lucas: 'AQM-benjisvibes',
-  jonte: 'herr_pettersson1'
-};
+const FN_PLAYERS = { lucas: 'AQM-benjisvibes', jonte: 'herr_pettersson1' };
+let _fnCache = { season: null, lifetime: null };
+let _fnTimeWindow = 'season';
+let _fnView = 'overall';
 
-async function fetchFnPlayer(name) {
-  const res = await fetch(`https://fortnite-api.com/v2/stats/br/v2?name=${encodeURIComponent(name)}&timeWindow=season`, {
+async function fetchFnPlayer(name, timeWindow) {
+  const res = await fetch(`https://fortnite-api.com/v2/stats/br/v2?name=${encodeURIComponent(name)}&timeWindow=${timeWindow}`, {
     headers: { 'Authorization': FN_API_KEY }
   });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return await res.json();
 }
 
-function renderFnStats(lData, jData) {
-  const div = document.getElementById('fn-stats-content');
+function fmt(v, decimals=0) {
+  if (v === null || v === undefined) return '–';
+  return decimals > 0 ? Number(v).toFixed(decimals) : Number(v).toLocaleString('sv-SE');
+}
+function fmtTime(mins) {
+  if (!mins) return '–';
+  const h = Math.floor(mins/60), m = mins%60;
+  return h > 0 ? `${h}h ${m}m` : `${m}m`;
+}
+function fmtPct(v) { return v ? v.toFixed(1)+'%' : '–'; }
 
-  function playerHTML(data, player) {
-    if (!data || !data.data?.account) {
-      return `<div class="fn-player-card">
-        <div class="fn-player-name ${player}">${player === 'lucas' ? 'Lucas' : 'Jonte'}</div>
-        <div class="fn-error">Kunde inte hämta data. Kontrollera att kontot är publikt.</div>
-      </div>`;
-    }
+function statSection(s, color) {
+  if (!s) return '<p style="color:var(--muted);font-size:11px;text-align:center;padding:8px">Ingen data</p>';
+  return `
+    <div class="fn-stat-row"><span class="fn-stat-label">Vinster</span><span class="fn-stat-val gold">${fmt(s.wins)}</span></div>
+    <div class="fn-stat-row"><span class="fn-stat-label">Win%</span><span class="fn-stat-val">${fmtPct(s.winRate)}</span></div>
+    <div class="fn-stat-row"><span class="fn-stat-label">Matcher</span><span class="fn-stat-val">${fmt(s.matches)}</span></div>
+    <div class="fn-stat-row"><span class="fn-stat-label">K/D</span><span class="fn-stat-val" style="color:${color}">${fmt(s.kd,2)}</span></div>
+    <div class="fn-stat-row"><span class="fn-stat-label">Kills totalt</span><span class="fn-stat-val">${fmt(s.kills)}</span></div>
+    <div class="fn-stat-row"><span class="fn-stat-label">Kills/match</span><span class="fn-stat-val">${fmt(s.killsPerMatch,1)}</span></div>
+    <div class="fn-stat-row"><span class="fn-stat-label">Kills/min</span><span class="fn-stat-val">${fmt(s.killsPerMin,2)}</span></div>
+    <div class="fn-stat-row"><span class="fn-stat-label">Deaths</span><span class="fn-stat-val">${fmt(s.deaths)}</span></div>
+    <div class="fn-stat-row"><span class="fn-stat-label">Damage/match</span><span class="fn-stat-val" style="color:${color}">${fmt(s.damagePerMatch,0)}</span></div>
+    <div class="fn-stat-row"><span class="fn-stat-label">Score/match</span><span class="fn-stat-val">${fmt(s.scorePerMatch,0)}</span></div>
+    <div class="fn-stat-row"><span class="fn-stat-label">Top 3</span><span class="fn-stat-val">${fmt(s.top3)}</span></div>
+    <div class="fn-stat-row"><span class="fn-stat-label">Top 5</span><span class="fn-stat-val">${fmt(s.top5)}</span></div>
+    <div class="fn-stat-row"><span class="fn-stat-label">Top 10</span><span class="fn-stat-val">${fmt(s.top10)}</span></div>
+    <div class="fn-stat-row"><span class="fn-stat-label">Top 25</span><span class="fn-stat-val">${fmt(s.top25)}</span></div>
+    <div class="fn-stat-row"><span class="fn-stat-label">Speltid</span><span class="fn-stat-val" style="color:${color}">${fmtTime(s.minutesPlayed)}</span></div>
+    <div class="fn-stat-row"><span class="fn-stat-label">Spelare outlived</span><span class="fn-stat-val">${fmt(s.playersOutlived)}</span></div>
+  `;
+}
 
-    const all = data.data?.stats?.all?.overall || {};
-    const ranked = data.data?.stats?.all?.ranked || null;
-    const name = data.data?.account?.name || FN_PLAYERS[player];
+function playerHTML(data, player) {
+  const color = player === 'lucas' ? 'var(--lucas)' : 'var(--jonte)';
+  const label = player === 'lucas' ? 'Lucas' : 'Jonte';
 
-    const wins = all.wins ?? '–';
-    const matches = all.matches ?? '–';
-    const kills = all.kills ?? '–';
-    const kd = all.kd ? all.kd.toFixed(2) : '–';
-    const winRate = all.winRate ? (all.winRate * 100).toFixed(1) + '%' : '–';
-    const avgKills = all.killsPerMatch ? all.killsPerMatch.toFixed(1) : '–';
-    const top3 = all.top3 ?? '–';
-    const dmgPerMatch = all.damagePerMatch ? Math.round(all.damagePerMatch) : '–';
-    const minutesPlayed = all.minutesPlayed ?? null;
-    const hoursPlayed = minutesPlayed ? Math.round(minutesPlayed / 60) : '–';
-
+  if (!data || !data.data?.account) {
     return `<div class="fn-player-card">
-      <div class="fn-player-name ${player}"><i data-lucide="user" style="width:13px;height:13px"></i>${name}</div>
-      <div class="fn-stat-row"><span class="fn-stat-label">Vinster</span><span class="fn-stat-val gold">${wins}</span></div>
-      <div class="fn-stat-row"><span class="fn-stat-label">Win%</span><span class="fn-stat-val">${winRate}</span></div>
-      <div class="fn-stat-row"><span class="fn-stat-label">Matcher</span><span class="fn-stat-val">${matches}</span></div>
-      <div class="fn-stat-row"><span class="fn-stat-label">K/D</span><span class="fn-stat-val">${kd}</span></div>
-      <div class="fn-stat-row"><span class="fn-stat-label">Kills totalt</span><span class="fn-stat-val">${kills}</span></div>
-      <div class="fn-stat-row"><span class="fn-stat-label">Kills/match</span><span class="fn-stat-val">${avgKills}</span></div>
-      <div class="fn-stat-row"><span class="fn-stat-label">Damage/match</span><span class="fn-stat-val">${dmgPerMatch}</span></div>
-      <div class="fn-stat-row"><span class="fn-stat-label">Top 3</span><span class="fn-stat-val">${top3}</span></div>
-      <div class="fn-stat-row"><span class="fn-stat-label">Timmar spelade</span><span class="fn-stat-val">${hoursPlayed}</span></div>
+      <div class="fn-player-name ${player}"><i data-lucide="user" style="width:13px;height:13px"></i>${label}</div>
+      <div class="fn-error">Kunde inte hämta data. Kontrollera att kontot är publikt.</div>
     </div>`;
   }
 
+  const stats = data.data?.stats?.all || {};
+  const km = data.data?.stats?.keyboardMouse?.overall || null;
+  const gp = data.data?.stats?.gamepad?.overall || null;
+  const name = data.data?.account?.name || label;
+  const bp = data.data?.battlePass;
+
+  const view = _fnView;
+  let sectionData;
+  if (view === 'overall') sectionData = stats.overall;
+  else if (view === 'solo') sectionData = stats.solo;
+  else if (view === 'duos') sectionData = stats.duos;
+  else if (view === 'trios') sectionData = stats.trios;
+  else if (view === 'squads') sectionData = stats.squads;
+  else if (view === 'km') sectionData = km;
+  else if (view === 'gp') sectionData = gp;
+
+  const bpText = bp ? `<span style="font-size:10px;color:var(--muted);margin-left:8px">Battle Pass Lv ${bp.level}</span>` : '';
+
+  return `<div class="fn-player-card">
+    <div class="fn-player-name ${player}"><i data-lucide="user" style="width:13px;height:13px"></i>${name}${bpText}</div>
+    ${statSection(sectionData, color)}
+  </div>`;
+}
+
+function renderFnStats(lData, jData) {
+  const div = document.getElementById('fn-stats-content');
+  const tw = _fnTimeWindow === 'season' ? 'Säsongen' : 'Lifetime';
+
   div.innerHTML = `
+    <div class="fn-controls">
+      <div class="fn-toggle-group">
+        <button class="fn-toggle ${_fnTimeWindow==='season'?'active':''}" onclick="setFnTime('season')">Säsongen</button>
+        <button class="fn-toggle ${_fnTimeWindow==='lifetime'?'active':''}" onclick="setFnTime('lifetime')">Lifetime</button>
+      </div>
+      <div class="fn-toggle-group">
+        <button class="fn-toggle ${_fnView==='overall'?'active':''}" onclick="setFnView('overall')">Alla</button>
+        <button class="fn-toggle ${_fnView==='solo'?'active':''}" onclick="setFnView('solo')">Solo</button>
+        <button class="fn-toggle ${_fnView==='duos'?'active':''}" onclick="setFnView('duos')">Duos</button>
+        <button class="fn-toggle ${_fnView==='trios'?'active':''}" onclick="setFnView('trios')">Trios</button>
+        <button class="fn-toggle ${_fnView==='squads'?'active':''}" onclick="setFnView('squads')">Squads</button>
+        <button class="fn-toggle ${_fnView==='km'?'active':''}" onclick="setFnView('km')">MnK</button>
+        <button class="fn-toggle ${_fnView==='gp'?'active':''}" onclick="setFnView('gp')">Controller</button>
+      </div>
+    </div>
     <div class="fn-stats-grid">
       ${playerHTML(lData, 'lucas')}
       ${playerHTML(jData, 'jonte')}
     </div>
-    <div class="fn-last-updated">Uppdaterat: ${new Date().toLocaleTimeString('sv-SE', {hour:'2-digit',minute:'2-digit'})}</div>
+    <div class="fn-last-updated">Uppdaterat: ${new Date().toLocaleTimeString('sv-SE',{hour:'2-digit',minute:'2-digit'})} • ${tw}</div>
   `;
   setTimeout(() => { if(window.lucide) lucide.createIcons(); }, 50);
 }
 
+function setFnTime(tw) {
+  _fnTimeWindow = tw;
+  _fnCache[tw] = null;
+  fetchFnStats();
+}
+
+function setFnView(view) {
+  _fnView = view;
+  const cached = _fnCache[_fnTimeWindow];
+  if (cached) renderFnStats(cached.l, cached.j);
+  else fetchFnStats();
+}
+
 async function fetchFnStats() {
   const div = document.getElementById('fn-stats-content');
-  div.innerHTML = '<p class="fn-loading">Hämtar stats från Epic Games...</p>';
+  const cached = _fnCache[_fnTimeWindow];
+  if (cached) { renderFnStats(cached.l, cached.j); return; }
 
+  div.innerHTML = '<p class="fn-loading">Hämtar stats från Epic Games...</p>';
   try {
     const [lRes, jRes] = await Promise.allSettled([
-      fetchFnPlayer(FN_PLAYERS.lucas),
-      fetchFnPlayer(FN_PLAYERS.jonte)
+      fetchFnPlayer(FN_PLAYERS.lucas, _fnTimeWindow),
+      fetchFnPlayer(FN_PLAYERS.jonte, _fnTimeWindow)
     ]);
     const lData = lRes.status === 'fulfilled' ? lRes.value : null;
     const jData = jRes.status === 'fulfilled' ? jRes.value : null;
+    _fnCache[_fnTimeWindow] = { l: lData, j: jData };
     renderFnStats(lData, jData);
   } catch (e) {
-    div.innerHTML = `<p class="fn-error">Fel: ${e.message}. Kontrollera din API-nyckel.</p>`;
+    div.innerHTML = `<p class="fn-error">Fel: ${e.message}.</p>`;
   }
 }
 
 // ── LOAD ALL ──
 async function loadAll() {
-  const [sessions, matches] = await Promise.all([dbGet('sessions'), dbGet('matches')]);
+  const sessions = await dbGet('sessions');
+  const matches = [];
   _sessions = sessions;
   _matches = matches;
   renderHistory(sessions);
-  renderMatchHistory(matches);
   renderChart(sessions, matches);
   renderProgress(sessions, matches);
   renderImprovement(sessions, matches);
