@@ -578,14 +578,15 @@ function renderProgress(sessions) {
   if (days.length < 2) return;
   const f = byDay[days[0]], l = byDay[days[days.length-1]];
 
+  const sum = arr => arr.reduce((a,b)=>a+b,0);
   setProgress('pL-edit', 'bL-edit', pctChange(avg(f.lEdit), avg(l.lEdit), true));
   setProgress('pL-aim',  'bL-aim',  pctChange(avg(f.lAim),  avg(l.lAim),  false));
-  setProgress('pL-box',  'bL-box',  pctChange(avg(f.lBox),  avg(l.lBox),  false));
-  setProgress('pL-zone', 'bL-zone', pctChange(avg(f.lZone), avg(l.lZone), false));
+  setProgress('pL-box',  'bL-box',  pctChange(sum(f.lBox),  sum(l.lBox),  false));
+  setProgress('pL-zone', 'bL-zone', pctChange(sum(f.lZone), sum(l.lZone), false));
   setProgress('pJ-edit', 'bJ-edit', pctChange(avg(f.jEdit), avg(l.jEdit), true));
   setProgress('pJ-aim',  'bJ-aim',  pctChange(avg(f.jAim),  avg(l.jAim),  false));
-  setProgress('pJ-box',  'bJ-box',  pctChange(avg(f.jBox),  avg(l.jBox),  false));
-  setProgress('pJ-zone', 'bJ-zone', pctChange(avg(f.jZone), avg(l.jZone), false));
+  setProgress('pJ-box',  'bJ-box',  pctChange(sum(f.jBox),  sum(l.jBox),  false));
+  setProgress('pJ-zone', 'bJ-zone', pctChange(sum(f.jZone), sum(l.jZone), false));
 }
 
 function renderImprovement(sessions) {
