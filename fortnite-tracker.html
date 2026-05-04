@@ -13,7 +13,6 @@
     --card: #111b2a;
     --border: #1e3048;
     --accent: #00d4ff;
-    --accent2: #ff6b35;
     --lucas: #00d4ff;
     --jonte: #ff6b35;
     --text: #e8f0ff;
@@ -21,9 +20,7 @@
     --success: #00e5a0;
     --radius: 14px;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   body {
     font-family: 'Inter', sans-serif;
     background: var(--bg);
@@ -33,13 +30,7 @@
       radial-gradient(ellipse at 20% 0%, rgba(0,212,255,0.06) 0%, transparent 60%),
       radial-gradient(ellipse at 80% 100%, rgba(255,107,53,0.06) 0%, transparent 60%);
   }
-
-  /* ── HEADER ── */
-  header {
-    padding: 28px 24px 0;
-    text-align: center;
-    position: relative;
-  }
+  header { padding: 28px 24px 0; text-align: center; }
   .logo {
     font-family: 'Rajdhani', sans-serif;
     font-size: clamp(26px, 6vw, 42px);
@@ -50,263 +41,129 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  .subtitle {
-    font-size: 12px;
-    color: var(--muted);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-top: 4px;
-  }
+  .subtitle { font-size: 12px; color: var(--muted); letter-spacing: 3px; text-transform: uppercase; margin-top: 4px; }
   .sync-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 10px;
-    padding: 4px 12px;
-    background: var(--card);
-    border-radius: 20px;
-    border: 1px solid var(--border);
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; color: var(--muted); margin-top: 10px;
+    padding: 4px 12px; background: var(--card);
+    border-radius: 20px; border: 1px solid var(--border);
   }
-  .dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: var(--muted);
-    transition: background 0.3s;
-  }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); transition: background 0.3s; }
   .dot.live { background: var(--success); box-shadow: 0 0 8px var(--success); }
-
-  /* ── LAYOUT ── */
   .container { max-width: 900px; margin: 0 auto; padding: 20px 16px 60px; }
-
-  /* ── CARDS ── */
   .card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-    margin-bottom: 16px;
-    position: relative;
-    overflow: hidden;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px; margin-bottom: 16px;
+    position: relative; overflow: hidden;
   }
   .card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--lucas), var(--jonte));
-    opacity: 0.5;
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--lucas), var(--jonte)); opacity: 0.5;
   }
   .card-title {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    font-family: 'Rajdhani', sans-serif; font-size: 16px; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
   }
-  .card-title span { font-size: 18px; }
-
-  /* ── PLAYER HEADERS ── */
-  .player-header {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 8px;
-    margin-bottom: 8px;
-  }
+  .player-header { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px; }
   .player-label {
-    text-align: center;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 6px;
-    border-radius: 8px;
+    text-align: center; font-size: 11px; font-weight: 500;
+    letter-spacing: 2px; text-transform: uppercase; padding: 6px; border-radius: 8px;
   }
   .player-label.lucas { color: var(--lucas); background: rgba(0,212,255,0.08); }
   .player-label.jonte { color: var(--jonte); background: rgba(255,107,53,0.08); }
   .player-label.level { color: var(--muted); }
-
-  /* ── INPUT ROWS ── */
-  .input-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 8px;
-    margin-bottom: 8px;
-    align-items: center;
-  }
+  .input-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px; align-items: center; }
   .level-badge {
-    text-align: center;
-    font-size: 12px;
-    font-weight: 500;
-    padding: 10px 6px;
-    border-radius: 8px;
-    color: var(--muted);
-    background: var(--surface);
-    border: 1px solid var(--border);
+    text-align: center; font-size: 12px; font-weight: 500;
+    padding: 10px 6px; border-radius: 8px; color: var(--muted);
+    background: var(--surface); border: 1px solid var(--border);
   }
   .level-badge.easy    { color: #4ade80; border-color: rgba(74,222,128,0.2); }
   .level-badge.medium  { color: #facc15; border-color: rgba(250,204,21,0.2); }
   .level-badge.hard    { color: #fb923c; border-color: rgba(251,146,60,0.2); }
   .level-badge.vhard   { color: #f87171; border-color: rgba(248,113,113,0.2); }
   .level-badge.impossible { color: #c084fc; border-color: rgba(192,132,252,0.2); }
-
-  input[type="text"], input[type="number"] {
-    width: 100%;
-    padding: 10px 12px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text);
-    font-size: 14px;
-    font-family: 'Inter', sans-serif;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    text-align: center;
-    -moz-appearance: textfield;
+  input[type="text"] {
+    width: 100%; padding: 10px 12px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 8px; color: var(--text);
+    font-size: 14px; font-family: 'Inter', sans-serif;
+    transition: border-color 0.2s, box-shadow 0.2s; text-align: center;
   }
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button { -webkit-appearance: none; }
   input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(0,212,255,0.12); }
   input.jonte-input:focus { border-color: var(--jonte); box-shadow: 0 0 0 2px rgba(255,107,53,0.12); }
   input::placeholder { color: var(--muted); font-size: 12px; }
-
-  /* ── BUTTONS ── */
-  .btn {
-    padding: 12px 24px;
-    border: none;
-    border-radius: 10px;
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .btn-primary {
-    background: linear-gradient(135deg, var(--accent), #0090b8);
-    color: #000;
-    width: 100%;
-  }
+  .btn { padding: 12px 24px; border: none; border-radius: 10px; font-family: 'Rajdhani', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 1px; cursor: pointer; transition: all 0.2s; }
+  .btn-primary { background: linear-gradient(135deg, var(--accent), #0090b8); color: #000; width: 100%; }
   .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
-  .btn-small {
-    padding: 8px 16px;
-    font-size: 13px;
-    background: var(--surface);
-    color: var(--text);
-    border: 1px solid var(--border);
-  }
+  .btn-small { padding: 8px 16px; font-size: 13px; background: var(--surface); color: var(--text); border: 1px solid var(--border); }
   .btn-small:hover { border-color: var(--accent); color: var(--accent); }
 
-  /* ── STATS BAR ── */
-  .stats-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 16px;
+  /* PROGRESS */
+  .progress-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 8px; }
+  .progress-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+  .progress-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; font-weight: 600; }
+  .progress-row { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; }
+  .progress-row-header { display: flex; justify-content: space-between; font-size: 12px; }
+  .progress-name { color: var(--muted); }
+  .progress-pct { font-weight: 500; font-size: 12px; }
+  .progress-pct.pos { color: var(--success); }
+  .progress-pct.neg { color: #f87171; }
+  .progress-pct.neu { color: var(--muted); }
+  .bar-track { height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 3px; transition: width 0.7s ease; }
+  .bar-lucas { background: linear-gradient(90deg, #00d4ff, #0090b8); }
+  .bar-jonte { background: linear-gradient(90deg, #ff6b35, #cc4400); }
+
+  /* IMPROVEMENT */
+  .improvement-banner {
+    background: linear-gradient(135deg, rgba(0,229,160,0.1), rgba(0,212,255,0.05));
+    border: 1px solid rgba(0,229,160,0.25); border-radius: 10px;
+    padding: 14px 18px; font-family: 'Rajdhani', sans-serif; font-size: 18px;
+    font-weight: 600; text-align: center; color: var(--success); letter-spacing: 1px; min-height: 50px;
   }
-  .stat-box {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px;
-    text-align: center;
-  }
+  .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+  .stat-box { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; text-align: center; }
   .stat-name { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
   .stat-val { font-family: 'Rajdhani', sans-serif; font-size: 26px; font-weight: 700; }
   .stat-val.lucas { color: var(--lucas); }
   .stat-val.jonte { color: var(--jonte); }
 
-  /* ── IMPROVEMENT BANNER ── */
-  .improvement-banner {
-    background: linear-gradient(135deg, rgba(0,229,160,0.1), rgba(0,212,255,0.05));
-    border: 1px solid rgba(0,229,160,0.25);
-    border-radius: 10px;
-    padding: 14px 18px;
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 18px;
-    font-weight: 600;
-    text-align: center;
-    color: var(--success);
-    letter-spacing: 1px;
-    min-height: 50px;
-  }
-
-  /* ── CHART ── */
+  /* CHART */
   .chart-wrap { position: relative; height: 200px; margin-top: 8px; }
 
-  /* ── HISTORY ── */
-  .history-entry {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 12px 14px;
-    margin-bottom: 8px;
+  /* HISTORY */
+  .history-day { margin-bottom: 16px; }
+  .history-day-header {
+    font-family: 'Rajdhani', sans-serif; font-size: 13px; font-weight: 600;
+    letter-spacing: 1px; color: var(--muted); text-transform: uppercase;
+    padding: 6px 0; border-bottom: 1px solid var(--border); margin-bottom: 8px;
   }
-  .history-date {
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-  }
-  .history-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    font-size: 13px;
-  }
-  .history-player { color: var(--muted); }
-  .history-player span { color: var(--text); }
+  .history-run { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; margin-bottom: 6px; }
+  .history-run-time { font-size: 10px; color: var(--muted); margin-bottom: 6px; letter-spacing: 1px; }
+  .history-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 12px; }
+  .hp { color: var(--muted); }
+  .hp span { color: var(--text); }
 
-  /* ── LOG ── */
+  /* LOG */
   .log-row { display: flex; gap: 8px; margin-bottom: 10px; }
   .log-row input { flex: 1; text-align: left; }
-  .log-entry {
-    background: var(--surface);
-    border-left: 3px solid var(--accent);
-    border-radius: 0 8px 8px 0;
-    padding: 8px 12px;
-    margin-bottom: 6px;
-    font-size: 13px;
-    color: var(--text);
-  }
+  .log-entry { background: var(--surface); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 8px 12px; margin-bottom: 6px; font-size: 13px; }
   .log-date { font-size: 10px; color: var(--muted); margin-bottom: 2px; }
 
-  /* ── SECTION DIVIDER ── */
-  .divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--border), transparent);
-    margin: 8px 0 16px;
-  }
-
-  /* ── TOAST ── */
   .toast {
-    position: fixed;
-    bottom: 24px;
-    left: 50%;
+    position: fixed; bottom: 24px; left: 50%;
     transform: translateX(-50%) translateY(80px);
-    background: var(--success);
-    color: #000;
-    padding: 10px 20px;
-    border-radius: 30px;
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: 1px;
-    transition: transform 0.3s ease;
-    z-index: 999;
-    pointer-events: none;
+    background: var(--success); color: #000; padding: 10px 20px;
+    border-radius: 30px; font-family: 'Rajdhani', sans-serif;
+    font-weight: 700; font-size: 14px; letter-spacing: 1px;
+    transition: transform 0.3s ease; z-index: 999; pointer-events: none;
   }
   .toast.show { transform: translateX(-50%) translateY(0); }
 
-  /* ── MOBILE ── */
   @media (max-width: 500px) {
     .input-row, .player-header { grid-template-columns: 80px 1fr 1fr; }
+    .progress-grid { grid-template-columns: 1fr; }
     .stats-row { grid-template-columns: 1fr 1fr; }
     .card { padding: 14px; }
   }
@@ -325,32 +182,77 @@
 
 <div class="container">
 
-  <!-- IMPROVEMENT + STATS -->
+  <!-- FÖRBÄTTRING -->
   <div class="card">
     <div class="card-title"><span>🏆</span> Vem har förbättrats mest?</div>
     <div class="improvement-banner" id="improvement">Laddar...</div>
-    <div class="divider"></div>
     <div class="stats-row">
       <div class="stat-box">
-        <div class="stat-name">Lucas snitt (edit)</div>
+        <div class="stat-name">Lucas snitt edit</div>
         <div class="stat-val lucas" id="statLucas">–</div>
       </div>
       <div class="stat-box">
-        <div class="stat-name">Jonte snitt (edit)</div>
+        <div class="stat-name">Jonte snitt edit</div>
         <div class="stat-val jonte" id="statJonte">–</div>
       </div>
     </div>
   </div>
 
+  <!-- PROGRESS PER KATEGORI -->
+  <div class="card">
+    <div class="card-title"><span>📊</span> Förbättring per kategori</div>
+    <div class="progress-grid">
+      <div class="progress-card">
+        <div class="progress-label">Lucas</div>
+        <div class="progress-row">
+          <div class="progress-row-header"><span class="progress-name">Edit (tid)</span><span class="progress-pct neu" id="pL-edit">–</span></div>
+          <div class="bar-track"><div class="bar-fill bar-lucas" id="bL-edit" style="width:0%"></div></div>
+        </div>
+        <div class="progress-row">
+          <div class="progress-row-header"><span class="progress-name">Aim (poäng)</span><span class="progress-pct neu" id="pL-aim">–</span></div>
+          <div class="bar-track"><div class="bar-fill bar-lucas" id="bL-aim" style="width:0%"></div></div>
+        </div>
+        <div class="progress-row">
+          <div class="progress-row-header"><span class="progress-name">Box Fight</span><span class="progress-pct neu" id="pL-box">–</span></div>
+          <div class="bar-track"><div class="bar-fill bar-lucas" id="bL-box" style="width:0%"></div></div>
+        </div>
+        <div class="progress-row">
+          <div class="progress-row-header"><span class="progress-name">Zone Wars</span><span class="progress-pct neu" id="pL-zone">–</span></div>
+          <div class="bar-track"><div class="bar-fill bar-lucas" id="bL-zone" style="width:0%"></div></div>
+        </div>
+      </div>
+      <div class="progress-card">
+        <div class="progress-label">Jonte</div>
+        <div class="progress-row">
+          <div class="progress-row-header"><span class="progress-name">Edit (tid)</span><span class="progress-pct neu" id="pJ-edit">–</span></div>
+          <div class="bar-track"><div class="bar-fill bar-jonte" id="bJ-edit" style="width:0%"></div></div>
+        </div>
+        <div class="progress-row">
+          <div class="progress-row-header"><span class="progress-name">Aim (poäng)</span><span class="progress-pct neu" id="pJ-aim">–</span></div>
+          <div class="bar-track"><div class="bar-fill bar-jonte" id="bJ-aim" style="width:0%"></div></div>
+        </div>
+        <div class="progress-row">
+          <div class="progress-row-header"><span class="progress-name">Box Fight</span><span class="progress-pct neu" id="pJ-box">–</span></div>
+          <div class="bar-track"><div class="bar-fill bar-jonte" id="bJ-box" style="width:0%"></div></div>
+        </div>
+        <div class="progress-row">
+          <div class="progress-row-header"><span class="progress-name">Zone Wars</span><span class="progress-pct neu" id="pJ-zone">–</span></div>
+          <div class="bar-track"><div class="bar-fill bar-jonte" id="bJ-zone" style="width:0%"></div></div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:4px">Första dag vs senaste dag. Edit: lägre tid = bättre. Aim/Box/Zone: fler poäng/vinster = bättre.</p>
+  </div>
+
   <!-- CHART -->
   <div class="card">
-    <div class="card-title"><span>📈</span> Utveckling över tid</div>
+    <div class="card-title"><span>📈</span> Utveckling över tid (edit-snitt per dag)</div>
     <div class="chart-wrap">
-      <canvas id="chart"></canvas>
+      <canvas id="chart" role="img" aria-label="Linjediagram över Lucas och Jontes edit-snitt per dag">Ingen data ännu.</canvas>
     </div>
   </div>
 
-  <!-- EDIT TRÄNING -->
+  <!-- EDIT -->
   <div class="card">
     <div class="card-title"><span>✏️</span> Edit Träning – Tider (sekunder)</div>
     <div class="player-header">
@@ -358,87 +260,43 @@
       <div class="player-label lucas">Lucas</div>
       <div class="player-label jonte">Jonte</div>
     </div>
-    <div class="input-row">
-      <div class="level-badge easy">Easy</div>
-      <input type="number" class="lEdit" placeholder="t.ex. 12">
-      <input type="number" class="jEdit jonte-input" placeholder="t.ex. 15">
-    </div>
-    <div class="input-row">
-      <div class="level-badge medium">Medium</div>
-      <input type="number" class="lEdit" placeholder="–">
-      <input type="number" class="jEdit jonte-input" placeholder="–">
-    </div>
-    <div class="input-row">
-      <div class="level-badge hard">Hard</div>
-      <input type="number" class="lEdit" placeholder="–">
-      <input type="number" class="jEdit jonte-input" placeholder="–">
-    </div>
-    <div class="input-row">
-      <div class="level-badge vhard">Very Hard</div>
-      <input type="number" class="lEdit" placeholder="–">
-      <input type="number" class="jEdit jonte-input" placeholder="–">
-    </div>
-    <div class="input-row">
-      <div class="level-badge impossible">Impossible</div>
-      <input type="number" class="lEdit" placeholder="–">
-      <input type="number" class="jEdit jonte-input" placeholder="–">
-    </div>
+    <div class="input-row"><div class="level-badge easy">Easy</div><input type="text" class="lEdit" placeholder="t.ex. 12"><input type="text" class="jEdit jonte-input" placeholder="t.ex. 15"></div>
+    <div class="input-row"><div class="level-badge medium">Medium</div><input type="text" class="lEdit" placeholder="–"><input type="text" class="jEdit jonte-input" placeholder="–"></div>
+    <div class="input-row"><div class="level-badge hard">Hard</div><input type="text" class="lEdit" placeholder="–"><input type="text" class="jEdit jonte-input" placeholder="–"></div>
+    <div class="input-row"><div class="level-badge vhard">Very Hard</div><input type="text" class="lEdit" placeholder="–"><input type="text" class="jEdit jonte-input" placeholder="–"></div>
+    <div class="input-row"><div class="level-badge impossible">Impossible</div><input type="text" class="lEdit" placeholder="–"><input type="text" class="jEdit jonte-input" placeholder="–"></div>
   </div>
 
-  <!-- AIM TRAINING -->
+  <!-- AIM -->
   <div class="card">
     <div class="card-title"><span>🎯</span> Aim Training – Poäng</div>
     <div class="player-header">
-      <div class="player-label level">Övning</div>
+      <div class="player-label level">Kör</div>
       <div class="player-label lucas">Lucas</div>
       <div class="player-label jonte">Jonte</div>
     </div>
-    <div class="input-row">
-      <div class="level-badge easy">Kör 1</div>
-      <input type="number" class="lAim" placeholder="–">
-      <input type="number" class="jAim jonte-input" placeholder="–">
-    </div>
-    <div class="input-row">
-      <div class="level-badge medium">Kör 2</div>
-      <input type="number" class="lAim" placeholder="–">
-      <input type="number" class="jAim jonte-input" placeholder="–">
-    </div>
+    <div class="input-row"><div class="level-badge easy">Kör 1</div><input type="text" class="lAim" placeholder="–"><input type="text" class="jAim jonte-input" placeholder="–"></div>
+    <div class="input-row"><div class="level-badge medium">Kör 2</div><input type="text" class="lAim" placeholder="–"><input type="text" class="jAim jonte-input" placeholder="–"></div>
   </div>
 
   <!-- BOX FIGHT -->
   <div class="card">
     <div class="card-title"><span>📦</span> Box Fight – Vinster</div>
-    <div class="player-header">
-      <div class="player-label level"></div>
-      <div class="player-label lucas">Lucas</div>
-      <div class="player-label jonte">Jonte</div>
-    </div>
-    <div class="input-row">
-      <div class="level-badge" style="color:var(--muted)">Idag</div>
-      <input type="number" id="lBox" placeholder="0">
-      <input type="number" id="jBox" class="jonte-input" placeholder="0">
-    </div>
+    <div class="player-header"><div class="player-label level"></div><div class="player-label lucas">Lucas</div><div class="player-label jonte">Jonte</div></div>
+    <div class="input-row"><div class="level-badge" style="color:var(--muted)">Idag</div><input type="text" id="lBox" placeholder="0"><input type="text" id="jBox" class="jonte-input" placeholder="0"></div>
   </div>
 
   <!-- ZONE WARS -->
   <div class="card">
     <div class="card-title"><span>🌀</span> Zone Wars – Vinster</div>
-    <div class="player-header">
-      <div class="player-label level"></div>
-      <div class="player-label lucas">Lucas</div>
-      <div class="player-label jonte">Jonte</div>
-    </div>
-    <div class="input-row">
-      <div class="level-badge" style="color:var(--muted)">Idag</div>
-      <input type="number" id="lZone" placeholder="0">
-      <input type="number" id="jZone" class="jonte-input" placeholder="0">
-    </div>
+    <div class="player-header"><div class="player-label level"></div><div class="player-label lucas">Lucas</div><div class="player-label jonte">Jonte</div></div>
+    <div class="input-row"><div class="level-badge" style="color:var(--muted)">Idag</div><input type="text" id="lZone" placeholder="0"><input type="text" id="jZone" class="jonte-input" placeholder="0"></div>
   </div>
 
   <!-- SPARA -->
   <div class="card">
-    <div class="card-title"><span>💾</span> Spara dagens resultat</div>
-    <button class="btn btn-primary" onclick="saveDay()">SPARA IDAG</button>
+    <div class="card-title"><span>💾</span> Spara denna körning</div>
+    <button class="btn btn-primary" onclick="saveDay()">SPARA</button>
   </div>
 
   <!-- DAGBOK -->
@@ -465,25 +323,18 @@
 // ════════════════════════════════════════════
 // ⚠️  KLISTRA IN DINA SUPABASE-UPPGIFTER HÄR
 // ════════════════════════════════════════════
-const SUPABASE_URL = 'https://ioonrlbuhwjvyzjgxwjp.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlvb25ybGJ1aHdqdnl6amd4d2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NTgxNzgsImV4cCI6MjA5MzQzNDE3OH0.sQiJoCBIAg1QbHoTB-v4TKAxa9Eje3Wp4GcG05IJl6Q';
+const SUPABASE_URL = 'DIN_PROJECT_URL_HÄR';
+const SUPABASE_KEY = 'DIN_PUBLISHABLE_KEY_HÄR';
 // ════════════════════════════════════════════
 
 const API = `${SUPABASE_URL}/rest/v1`;
-const HEADS = {
-  'apikey': SUPABASE_KEY,
-  'Authorization': `Bearer ${SUPABASE_KEY}`,
-  'Content-Type': 'application/json',
-  'Prefer': 'return=representation'
-};
+const HEADS = { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=representation' };
 
-// ── SYNC STATUS ──
 function setSync(live) {
   document.getElementById('syncDot').className = 'dot' + (live ? ' live' : '');
   document.getElementById('syncText').textContent = live ? 'Live sync' : 'Offline';
 }
 
-// ── FETCH helpers ──
 async function dbGet(table) {
   try {
     const r = await fetch(`${API}/${table}?order=created_at.asc`, { headers: HEADS });
@@ -494,31 +345,26 @@ async function dbGet(table) {
 }
 
 async function dbInsert(table, data) {
-  const r = await fetch(`${API}/${table}`, {
-    method: 'POST', headers: HEADS, body: JSON.stringify(data)
-  });
+  const r = await fetch(`${API}/${table}`, { method: 'POST', headers: HEADS, body: JSON.stringify(data) });
   return r.ok;
 }
 
-// ── HELPERS ──
 function avg(arr) {
   const nums = arr.map(Number).filter(x => !isNaN(x) && x > 0);
   if (!nums.length) return 0;
   return Math.round(nums.reduce((a,b)=>a+b,0)/nums.length * 10) / 10;
 }
 
-function today() {
-  return new Date().toLocaleDateString('sv-SE');
-}
+function today() { return new Date().toLocaleDateString('sv-SE'); }
+function timeNow() { return new Date().toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' }); }
 
-function toast(msg = '✓ Sparat!') {
+function toast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2500);
 }
 
-// ── SPARA DAG ──
 async function saveDay() {
   const lEdit = [...document.querySelectorAll('.lEdit')].map(i=>i.value);
   const jEdit = [...document.querySelectorAll('.jEdit')].map(i=>i.value);
@@ -530,136 +376,185 @@ async function saveDay() {
   const jZone = document.getElementById('jZone').value;
 
   const ok = await dbInsert('sessions', {
-    date: today(),
+    date: today(), time: timeNow(),
     l_edit: lEdit, j_edit: jEdit,
-    l_aim: lAim,   j_aim: jAim,
-    l_box: Number(lBox)||0,  j_box: Number(jBox)||0,
+    l_aim: lAim, j_aim: jAim,
+    l_box: Number(lBox)||0, j_box: Number(jBox)||0,
     l_zone: Number(lZone)||0, j_zone: Number(jZone)||0
   });
 
-  if (ok) { toast('✓ Sparat!'); await loadAll(); }
-  else toast('❌ Fel – kontrollera Supabase');
+  if (ok) {
+    toast('✓ Körning sparad!');
+    document.querySelectorAll('.lEdit,.jEdit,.lAim,.jAim').forEach(i=>i.value='');
+    ['lBox','jBox','lZone','jZone'].forEach(id=>document.getElementById(id).value='');
+    await loadAll();
+  } else {
+    toast('❌ Fel – kontrollera Supabase');
+  }
 }
 
-// ── LÄGG TILL LOGG ──
 async function addLog() {
   const v = document.getElementById('logInput').value.trim();
   if (!v) return;
-  await dbInsert('logs', { date: today(), text: v });
+  await dbInsert('logs', { date: today(), time: timeNow(), text: v });
   document.getElementById('logInput').value = '';
   toast('✓ Logg sparad!');
   await loadLogs();
 }
 
-// ── RENDERA HISTORIK ──
-function renderHistory(sessions) {
-  const div = document.getElementById('history');
-  if (!sessions.length) { div.innerHTML = '<p style="color:var(--muted);font-size:13px">Inga sessioner sparade än.</p>'; return; }
-  div.innerHTML = [...sessions].reverse().map(s => `
-    <div class="history-entry">
-      <div class="history-date">📅 ${s.date}</div>
-      <div class="history-grid">
-        <div class="history-player" style="color:var(--lucas)">Lucas edit: <span>${(s.l_edit||[]).filter(x=>x).join(', ') || '–'}</span></div>
-        <div class="history-player" style="color:var(--jonte)">Jonte edit: <span>${(s.j_edit||[]).filter(x=>x).join(', ') || '–'}</span></div>
-        <div class="history-player" style="color:var(--lucas)">Lucas aim: <span>${(s.l_aim||[]).filter(x=>x).join(', ') || '–'}</span></div>
-        <div class="history-player" style="color:var(--jonte)">Jonte aim: <span>${(s.j_aim||[]).filter(x=>x).join(', ') || '–'}</span></div>
-        <div class="history-player" style="color:var(--lucas)">Lucas box: <span>${s.l_box??'–'}</span> | zone: <span>${s.l_zone??'–'}</span></div>
-        <div class="history-player" style="color:var(--jonte)">Jonte box: <span>${s.j_box??'–'}</span> | zone: <span>${s.j_zone??'–'}</span></div>
-      </div>
-    </div>
-  `).join('');
-}
-
-// ── LOGGAR ──
 async function loadLogs() {
   const logs = await dbGet('logs');
   const div = document.getElementById('logs');
   if (!logs.length) { div.innerHTML = ''; return; }
   div.innerHTML = [...logs].reverse().map(l => `
     <div class="log-entry">
-      <div class="log-date">${l.date}</div>
+      <div class="log-date">${l.date} ${l.time||''}</div>
       ${l.text}
     </div>
   `).join('');
 }
 
-// ── CHART ──
+function renderHistory(sessions) {
+  const div = document.getElementById('history');
+  if (!sessions.length) { div.innerHTML = '<p style="color:var(--muted);font-size:13px">Inga körningar sparade än.</p>'; return; }
+
+  const byDay = {};
+  [...sessions].reverse().forEach(s => {
+    if (!byDay[s.date]) byDay[s.date] = [];
+    byDay[s.date].push(s);
+  });
+
+  div.innerHTML = Object.entries(byDay).map(([date, runs]) => `
+    <div class="history-day">
+      <div class="history-day-header">📅 ${date} — ${runs.length} körning${runs.length>1?'ar':''}</div>
+      ${runs.map((s, i) => `
+        <div class="history-run">
+          <div class="history-run-time">KÖR ${runs.length - i} • ${s.time||''}</div>
+          <div class="history-grid">
+            <div class="hp" style="color:var(--lucas)">Lucas edit: <span>${(s.l_edit||[]).filter(x=>x).join(', ')||'–'}</span></div>
+            <div class="hp" style="color:var(--jonte)">Jonte edit: <span>${(s.j_edit||[]).filter(x=>x).join(', ')||'–'}</span></div>
+            <div class="hp" style="color:var(--lucas)">Lucas aim: <span>${(s.l_aim||[]).filter(x=>x).join(', ')||'–'}</span></div>
+            <div class="hp" style="color:var(--jonte)">Jonte aim: <span>${(s.j_aim||[]).filter(x=>x).join(', ')||'–'}</span></div>
+            <div class="hp" style="color:var(--lucas)">Lucas box: <span>${s.l_box??'–'}</span> · zone: <span>${s.l_zone??'–'}</span></div>
+            <div class="hp" style="color:var(--jonte)">Jonte box: <span>${s.j_box??'–'}</span> · zone: <span>${s.j_zone??'–'}</span></div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+}
+
 let chart;
 function renderChart(sessions) {
-  const labels = sessions.map(s=>s.date);
-  const dL = sessions.map(s => avg(s.l_edit||[]));
-  const dJ = sessions.map(s => avg(s.j_edit||[]));
+  const byDay = {};
+  sessions.forEach(s => {
+    if (!byDay[s.date]) byDay[s.date] = { lEdit:[], jEdit:[] };
+    byDay[s.date].lEdit.push(...(s.l_edit||[]).map(Number).filter(x=>x>0));
+    byDay[s.date].jEdit.push(...(s.j_edit||[]).map(Number).filter(x=>x>0));
+  });
+  const days = Object.keys(byDay).sort();
+  const dL = days.map(d => avg(byDay[d].lEdit) || null);
+  const dJ = days.map(d => avg(byDay[d].jEdit) || null);
 
   if (chart) chart.destroy();
   chart = new Chart(document.getElementById('chart'), {
     type: 'line',
     data: {
-      labels,
+      labels: days,
       datasets: [
-        {
-          label: 'Lucas (lägre = bättre)',
-          data: dL,
-          borderColor: '#00d4ff',
-          backgroundColor: 'rgba(0,212,255,0.08)',
-          pointBackgroundColor: '#00d4ff',
-          tension: 0.4, fill: true, pointRadius: 5
-        },
-        {
-          label: 'Jonte (lägre = bättre)',
-          data: dJ,
-          borderColor: '#ff6b35',
-          backgroundColor: 'rgba(255,107,53,0.08)',
-          pointBackgroundColor: '#ff6b35',
-          tension: 0.4, fill: true, pointRadius: 5
-        }
+        { label: 'Lucas (sek)', data: dL, borderColor: '#00d4ff', backgroundColor: 'rgba(0,212,255,0.08)', pointBackgroundColor: '#00d4ff', tension: 0.4, fill: true, pointRadius: 5 },
+        { label: 'Jonte (sek)', data: dJ, borderColor: '#ff6b35', backgroundColor: 'rgba(255,107,53,0.08)', pointBackgroundColor: '#ff6b35', tension: 0.4, fill: true, pointRadius: 5, borderDash: [4,3] }
       ]
     },
     options: {
       responsive: true, maintainAspectRatio: false,
-      plugins: {
-        legend: { labels: { color: '#5a7a9a', font: { family: 'Inter', size: 11 } } }
-      },
+      plugins: { legend: { labels: { color: '#5a7a9a', font: { family: 'Inter', size: 11 }, usePointStyle: true } } },
       scales: {
         x: { ticks: { color: '#5a7a9a', font: { size: 10 } }, grid: { color: '#1e3048' } },
-        y: { ticks: { color: '#5a7a9a', font: { size: 10 } }, grid: { color: '#1e3048' } }
+        y: { ticks: { color: '#5a7a9a', font: { size: 10 } }, grid: { color: '#1e3048' }, title: { display: true, text: 'sek (lägre = bättre)', color: '#5a7a9a', font: { size: 10 } } }
       }
     }
   });
 }
 
-// ── FÖRBÄTTRING ──
+function pctChange(first, last, lowerIsBetter) {
+  if (!first || !last) return null;
+  const change = ((last - first) / first) * 100;
+  return lowerIsBetter ? -change : change;
+}
+
+function setProgress(id, barId, pct) {
+  const el = document.getElementById(id);
+  const bar = document.getElementById(barId);
+  if (pct === null) { el.textContent = '–'; el.className = 'progress-pct neu'; bar.style.width = '0%'; return; }
+  const r = Math.round(pct);
+  el.textContent = (r > 0 ? '+' : '') + r + '%';
+  el.className = 'progress-pct ' + (r > 0 ? 'pos' : r < 0 ? 'neg' : 'neu');
+  bar.style.width = Math.min(Math.abs(r), 100) + '%';
+}
+
+function renderProgress(sessions) {
+  if (sessions.length < 2) return;
+  const byDay = {};
+  sessions.forEach(s => {
+    if (!byDay[s.date]) byDay[s.date] = { lEdit:[], jEdit:[], lAim:[], jAim:[], lBox:[], jBox:[], lZone:[], jZone:[] };
+    byDay[s.date].lEdit.push(...(s.l_edit||[]).map(Number).filter(x=>x>0));
+    byDay[s.date].jEdit.push(...(s.j_edit||[]).map(Number).filter(x=>x>0));
+    byDay[s.date].lAim.push(...(s.l_aim||[]).map(Number).filter(x=>x>0));
+    byDay[s.date].jAim.push(...(s.j_aim||[]).map(Number).filter(x=>x>0));
+    if (s.l_box) byDay[s.date].lBox.push(s.l_box);
+    if (s.j_box) byDay[s.date].jBox.push(s.j_box);
+    if (s.l_zone) byDay[s.date].lZone.push(s.l_zone);
+    if (s.j_zone) byDay[s.date].jZone.push(s.j_zone);
+  });
+  const days = Object.keys(byDay).sort();
+  if (days.length < 2) return;
+  const f = byDay[days[0]], l = byDay[days[days.length-1]];
+
+  setProgress('pL-edit', 'bL-edit', pctChange(avg(f.lEdit), avg(l.lEdit), true));
+  setProgress('pL-aim',  'bL-aim',  pctChange(avg(f.lAim),  avg(l.lAim),  false));
+  setProgress('pL-box',  'bL-box',  pctChange(avg(f.lBox),  avg(l.lBox),  false));
+  setProgress('pL-zone', 'bL-zone', pctChange(avg(f.lZone), avg(l.lZone), false));
+  setProgress('pJ-edit', 'bJ-edit', pctChange(avg(f.jEdit), avg(l.jEdit), true));
+  setProgress('pJ-aim',  'bJ-aim',  pctChange(avg(f.jAim),  avg(l.jAim),  false));
+  setProgress('pJ-box',  'bJ-box',  pctChange(avg(f.jBox),  avg(l.jBox),  false));
+  setProgress('pJ-zone', 'bJ-zone', pctChange(avg(f.jZone), avg(l.jZone), false));
+}
+
 function renderImprovement(sessions) {
   const el = document.getElementById('improvement');
-  if (sessions.length < 2) { el.textContent = 'Spara minst 2 dagar för att se vem som förbättrats mest.'; return; }
+  const byDay = {};
+  sessions.forEach(s => {
+    if (!byDay[s.date]) byDay[s.date] = { lEdit:[], jEdit:[] };
+    byDay[s.date].lEdit.push(...(s.l_edit||[]).map(Number).filter(x=>x>0));
+    byDay[s.date].jEdit.push(...(s.j_edit||[]).map(Number).filter(x=>x>0));
+  });
+  const days = Object.keys(byDay).sort();
+  if (days.length < 2) { el.textContent = 'Spara data på minst 2 olika dagar för att se förbättring.'; return; }
 
-  const first = sessions[0], last = sessions[sessions.length-1];
-  const pL = avg(first.l_edit||[]) - avg(last.l_edit||[]);
-  const pJ = avg(first.j_edit||[]) - avg(last.j_edit||[]);
+  const f = byDay[days[0]], l = byDay[days[days.length-1]];
+  const pL = avg(f.lEdit) - avg(l.lEdit);
+  const pJ = avg(f.jEdit) - avg(l.jEdit);
 
-  if (pL > pJ)       el.textContent = '🔥 Lucas har förbättrats mest!';
-  else if (pJ > pL)  el.textContent = '🔥 Jonte har förbättrats mest!';
-  else               el.textContent = '⚖️ Ni har förbättrats lika mycket!';
+  if (pL > pJ)      el.textContent = '🔥 Lucas har förbättrats mest!';
+  else if (pJ > pL) el.textContent = '🔥 Jonte har förbättrats mest!';
+  else              el.textContent = '⚖️ Ni har förbättrats lika mycket!';
 
-  // snitt
-  const lastL = avg(last.l_edit||[]);
-  const lastJ = avg(last.j_edit||[]);
+  const lastL = avg(l.lEdit), lastJ = avg(l.jEdit);
   document.getElementById('statLucas').textContent = lastL ? lastL + 's' : '–';
   document.getElementById('statJonte').textContent = lastJ ? lastJ + 's' : '–';
 }
 
-// ── LOAD ALL ──
 async function loadAll() {
   const sessions = await dbGet('sessions');
   renderHistory(sessions);
   renderChart(sessions);
   renderImprovement(sessions);
+  renderProgress(sessions);
   await loadLogs();
 }
 
-// ── INIT ──
 loadAll();
-
-// Live-poll var 30s
 setInterval(loadAll, 30000);
 </script>
 </body>
