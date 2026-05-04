@@ -591,6 +591,21 @@ function fmtEditArr(arr) {
   return arr.map(s => secsToDisplay(Number(s))).filter(Boolean).join(', ') || '–';
 }
 
+
+function fmtAimData(d) {
+  if (!d) return '–';
+  const labels = { tb:'Tracking Ball', tf:'Tile Frenzy', rb:'Reaction Bot', sr:'Shotgun Reaction', sf:'Shotgun Flicks' };
+  const parts = [];
+  Object.entries(labels).forEach(([k, name]) => {
+    if (d[k] && (d[k].score || d[k].acc)) {
+      const sc = d[k].score ? `${d[k].score}` : '';
+      const ac = d[k].acc ? ` (${d[k].acc}%)` : '';
+      if (sc || ac) parts.push(`${name}: ${sc}${ac}`);
+    }
+  });
+  return parts.length ? parts.join(' · ') : '–';
+}
+
 function renderHistory(sessions) {
   const byDay = {};
   [...sessions].reverse().forEach(s => {
@@ -607,8 +622,8 @@ function renderHistory(sessions) {
           <div class="history-grid">
             <div class="hp" style="color:var(--lucas)">Lucas edit: <span>${fmtEditArr(s.l_edit)}</span></div>
             <div class="hp" style="color:var(--jonte)">Jonte edit: <span>${fmtEditArr(s.j_edit)}</span></div>
-            <div class="hp" style="color:var(--lucas)">Lucas aim: <span>${(s.l_aim||[]).filter(x=>x).join(', ')||'–'}</span></div>
-            <div class="hp" style="color:var(--jonte)">Jonte aim: <span>${(s.j_aim||[]).filter(x=>x).join(', ')||'–'}</span></div>
+            <div class="hp" style="color:var(--lucas)">Lucas aim: <span>${fmtAimData(s.l_aim_data)}</span></div>
+            <div class="hp" style="color:var(--jonte)">Jonte aim: <span>${fmtAimData(s.j_aim_data)}</span></div>
             <div class="hp" style="color:var(--lucas)">Lucas box: <span>${s.l_box??'–'}</span> · zone: <span>${s.l_zone??'–'}</span></div>
             <div class="hp" style="color:var(--jonte)">Jonte box: <span>${s.j_box??'–'}</span> · zone: <span>${s.j_zone??'–'}</span></div>
           </div>
@@ -624,7 +639,7 @@ function renderHistory(sessions) {
           <div class="history-run-time">KÖR ${runs.length-i} • ${s.time||''}</div>
           <div class="history-grid single">
             <div class="hp" style="color:var(--lucas)">Edit: <span>${fmtEditArr(s.l_edit)}</span></div>
-            <div class="hp" style="color:var(--lucas)">Aim: <span>${(s.l_aim||[]).filter(x=>x).join(', ')||'–'}</span></div>
+            <div class="hp" style="color:var(--lucas)">Aim: <span>${fmtAimData(s.l_aim_data)}</span></div>
             <div class="hp" style="color:var(--lucas)">Box: <span>${s.l_box??'–'}</span> · Zone: <span>${s.l_zone??'–'}</span></div>
           </div>
         </div>
@@ -639,7 +654,7 @@ function renderHistory(sessions) {
           <div class="history-run-time">KÖR ${runs.length-i} • ${s.time||''}</div>
           <div class="history-grid single">
             <div class="hp" style="color:var(--jonte)">Edit: <span>${fmtEditArr(s.j_edit)}</span></div>
-            <div class="hp" style="color:var(--jonte)">Aim: <span>${(s.j_aim||[]).filter(x=>x).join(', ')||'–'}</span></div>
+            <div class="hp" style="color:var(--jonte)">Aim: <span>${fmtAimData(s.j_aim_data)}</span></div>
             <div class="hp" style="color:var(--jonte)">Box: <span>${s.j_box??'–'}</span> · Zone: <span>${s.j_zone??'–'}</span></div>
           </div>
         </div>
